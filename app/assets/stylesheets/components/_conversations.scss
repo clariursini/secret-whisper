@@ -15,6 +15,7 @@
 .conversation a {
   margin: 0;
   line-height: 1.4;
+  text-decoration: none;
 }
 
 .conversation p {
@@ -24,4 +25,14 @@
 
 .conversation .conversation-content img {
   margin-right: 15px;
+}
+
+.actions i {
+  color: black;
+  font-size: 25px;
+  margin-right: 15px;
+}
+
+.actions a i:hover {
+  color: blue;
 }
