@@ -1,39 +1,41 @@
 <div class="container m-5">
- <h3>Conversations</h3>
- <div class="list">
-  <% @conversations.each do |conversation| %>
-   <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
-    <% if conversation.sender_id == current_user.id %>
-      <% recipient = User.find(conversation.recipient_id) %>
-    <% else %>
-      <% recipient = User.find(conversation.sender_id) %>
-    <% end %>
-    <div class="conversation">
-      <div class="conversation-content">
-        <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
-        <%= link_to recipient.email, conversation_messages_path(conversation)%>
-      </div>
-    </div>
-   <% end %>
-  <% end %>
-  </div>
- </div>
-</div>
-
-
-<div class="container m-5">
- <h3>All Users</h3>
+  <h3>Conversations</h3>
   <div class="list">
-   <% @users.each do |user| %>
-    <% if user.id != current_user.id %>
-     <div class="conversation">
-        <div class="conversation-content d-flex align-items-center">
-          <img src='https://kitt.lewagon.com/placeholder/users/arthur-littm' class="avatar-large" />
-          <p><%= user.email %></p>
-          <%= button_to 'Message me!', conversations_path(sender_id: current_user.id, recipient_id: user.id), class: "btn btn-primary" %>
+    <% @conversations.each do |conversation| %>
+      <% if conversation.sender_id == current_user.id || conversation.recipient_id == current_user.id %>
+        <% if conversation.sender_id == current_user.id %>
+          <% recipient = User.find(conversation.recipient_id) %>
+        <% else %>
+          <% recipient = User.find(conversation.sender_id) %>
+        <% end %>
+        <div class="conversation">
+          <div class="conversation-content d-flex align-items-center justify-content-between">
+
+            <div class="content d-flex align-items-center" style="margin-right:20px;">
+              <% if conversation.recipient.photo.key != nil %>
+                <%= cl_image_tag conversation.recipient.photo.key, class: "avatar-large" %>
+              <% else %>
+                <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+              <% end %>
+
+              <div class="title d-flex">
+                <strong><%= link_to "#{recipient.name} (#{conversation.recipient.age})", conversation_messages_path(conversation), style:"margin-right: 15px;" %></strong>
+              </div>
+            </div>
+
+            <div class="actions d-flex">
+              <%= link_to conversations_path(sender_id: current_user.id, recipient_id: conversation.id) do  %>
+                <i class="fa-solid fa-beer-mug-empty" ></i>
+              <% end %>
+
+              <%= link_to conversations_path(sender_id: current_user.id, recipient_id: conversation.id) do  %>
+                <i class="fa-sharp fa-solid fa-gamepad" ></i>
+              <% end %>
+            </div>
+
+          </div>
         </div>
-      </div>
-  <% end %>
- <% end %>
- </div>
+      <% end %>
+    <% end %>
+  </div>
 </div>
