@@ -2,36 +2,44 @@
  <%= link_to 'Show Previous', '?m=all' %>
 <% end %>
 
-<div class="ui segment" data-controller="chat-broadcast"
+<div class="container m-4">
+  <h1>Conversation with
+    <% if @conversation.recipient_id == current_user.id %>
+      <%= @conversation.sender.email %>
+    <% else %>
+      <%= @conversation.recipient.email %>
+    <% end %>
+  </h1>
+</div>
+
+<div class="container m-4" data-controller="chat-broadcast"
   data-chat-broadcast-conversation-id-value="<%= @conversation.id %>">
   <div class="messages" data-chat-broadcast-target="messages">
     <% @messages.each do |message| %>
       <% if message.body %>
           <% user = User.find(message.user_id) %>
-          <div class="item">
-            <div class="content">
-            <div class="header">
-              <strong><%= user.email %></strong>
-              <%= message.message_time %></div>
-              <div class="list">
-              <div class="item">
-                <i class="right triangle icon"></i>
-                <%= message.body %>
+          <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+            <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+              <div>
+                <strong><%= user.email %></strong>
+                <%= message.message_time %>
               </div>
+              <%= message.body %>
             </div>
           </div>
-        </div>
       <% end %>
     <% end %>
   </div>
 </div>
 
-<%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
- <div class="field">
-   <%= f.text_area :body, class: "form-control" %>
- </div>
- <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
- <div>
-   <%= f.submit "Add Reply", class: "ui blue labeled submit icon button" %>
- </div>
-<% end %>
+<div class="container m-4">
+  <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+  <div class="field">
+    <%= f.text_area :body, class: "form-control", style: "background: white; margin-bottom: 15px;" %>
+  </div>
+  <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+  <div>
+    <%= f.submit "Send", class: "btn btn-primary" %>
+  </div>
+  <% end %>
+</div>
