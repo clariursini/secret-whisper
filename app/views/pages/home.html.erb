@@ -1,3 +1,12 @@
-<h1>Pages#home</h1>
-<p>Find me in app/views/pages/home.html.erb</p>
-<%= link_to 'Conversations', conversations_path %>
+<div class="banner" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1483706600674-e0c87d3fe85b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1207&q=80);">
+  <div class="container">
+    <h1 class="mb-4">Secret Whisper</h1>
+    <p class="mb-5">Landing page for Secret Whisper</p>
+    <%= link_to 'Conversations', conversations_path, class: "btn btn-primary" %>
+  </div>
+</div>
+
+<div class="container m-5">
+  <h2 class="mb-4">Section subtitle</h2>
+  <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam unde incidunt optio porro libero eligendi ab officia illum esse? Nisi vero soluta doloribus neque doloremque iusto mollitia sequi, minus nulla!</p>
+</div>
