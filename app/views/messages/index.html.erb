@@ -1,45 +1,57 @@
-<% if @over_ten %>
- <%= link_to 'Show Previous', '?m=all' %>
-<% end %>
+<div class="container">
 
-<div class="container m-4">
-  <h1>Conversation with
-    <% if @conversation.recipient_id == current_user.id %>
-      <%= @conversation.sender.email %>
-    <% else %>
-      <%= @conversation.recipient.email %>
-    <% end %>
-  </h1>
-</div>
-
-<div class="container m-4" data-controller="chat-broadcast"
-  data-chat-broadcast-conversation-id-value="<%= @conversation.id %>">
-  <div class="messages" data-chat-broadcast-target="messages">
-    <% @messages.each do |message| %>
-      <% if message.body %>
-          <% user = User.find(message.user_id) %>
-          <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
-            <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
-              <div>
-                <strong><%= user.email %></strong>
-                <%= message.message_time %>
-              </div>
-              <%= message.body %>
-            </div>
-          </div>
-      <% end %>
-    <% end %>
-  </div>
-</div>
-
-<div class="container m-4">
-  <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
-  <div class="field">
-    <%= f.text_area :body, class: "form-control", style: "background: white; margin-bottom: 15px;" %>
-  </div>
-  <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-  <div>
-    <%= f.submit "Send", class: "btn btn-primary" %>
-  </div>
+  <% if @over_ten %>
+  <%= link_to 'Show Previous', '?m=all' %>
   <% end %>
+
+  <div class="container m-4 d-flex align-items-center">
+      <% if @conversation.recipient_id == current_user.id %>
+        <% if @conversation.sender.photo.key != nil %>
+          <%= cl_image_tag @conversation.sender.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
+        <% else %>
+          <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
+        <% end %>
+        <h1 style="margin:0"><%= @conversation.sender.name %></h1>
+      <% else %>
+        <% if @conversation.recipient.photo.key != nil %>
+          <%= cl_image_tag @conversation.recipient.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
+        <% else %>
+          <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
+        <% end %>
+        <h1 style="margin:0;"><%= @conversation.recipient.name %></h1>
+      <% end %>
+  </div>
+
+  <div class="container m-4" data-controller="chat-broadcast"
+    data-chat-broadcast-conversation-id-value="<%= @conversation.id %>">
+    <div class="messages" data-chat-broadcast-target="messages">
+      <% @messages.each do |message| %>
+        <% if message.body %>
+            <% user = User.find(message.user_id) %>
+            <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+              <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+                <div>
+                  <strong><%= user.email %></strong>
+                  <%= message.message_time %>
+                </div>
+                <%= message.body %>
+              </div>
+            </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+
+  <div class="container m-4">
+    <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+    <div class="field">
+      <%= f.text_area :body, class: "form-control", style: "background: white; margin-bottom: 15px;" %>
+    </div>
+    <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
+    <div>
+      <%= f.submit "Send", class: "btn btn-primary" %>
+    </div>
+    <% end %>
+  </div>
+
 </div>
