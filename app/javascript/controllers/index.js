@@ -4,5 +4,11 @@
 
 import { application } from "./application"
 
+import ChatBroadcastController from "./chat_broadcast_controller"
+application.register("chat-broadcast", ChatBroadcastController)
+
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
+
+import ResetFormController from "./reset_form_controller"
+application.register("reset-form", ResetFormController)
