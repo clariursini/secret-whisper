@@ -8,4 +8,7 @@ Rails.application.routes.draw do
   resources :conversations do
     resources :messages
   end
+
+  get 'friends', to: 'friends#index', as: 'friends'
+  get 'profile', to: 'friends#show', as: 'profile'
 end
