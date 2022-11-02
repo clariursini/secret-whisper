@@ -1,0 +1,27 @@
+<div class="container">
+
+  <div class="player1">
+    <p>Pick your choice</p>
+    <%= form_with do |f| %>
+      <div class="form-outline mb-4">
+        <%= f.select :choices, ["Paper", "Scissor", "Rock"] %>
+      </div>
+      <div class="form-outline mt-4">
+          <%= f.button :submit, class: "btn-update p-2" %>
+      </div>
+    <% end %>
+  </div>
+
+  <div class="player2">
+      <p>Pick your choice</p>
+      <%= form_with do |f| %>
+      <div class="form-outline mb-4">
+        <%= f.select :choices, ["Paper", "Scissor", "Rock"] %>
+      </div>
+      <div class="form-outline mt-4">
+          <%= f.button :submit, class: "btn-update p-2" %>
+      </div>
+    <% end %>
+  </div>
+
+</div>

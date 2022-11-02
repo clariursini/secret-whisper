@@ -9,6 +9,10 @@ Rails.application.routes.draw do
     resources :messages
   end
 
+  resources :games do
+    resources :results
+  end
+
   get 'friends', to: 'friends#index', as: 'friends'
   get 'profile', to: 'friends#show', as: 'profile'
 end
