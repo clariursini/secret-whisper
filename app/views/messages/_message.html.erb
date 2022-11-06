@@ -1,0 +1,12 @@
+<% if message.body %>
+  <% user = User.find(message.user_id) %>
+  <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
+    <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
+      <div>
+        <strong><%= user.name %></strong>
+        <%= message.message_time %>
+      </div>
+      <%= message.body %>
+    </div>
+  </div>
+<% end %>
