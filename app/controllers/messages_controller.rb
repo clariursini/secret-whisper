@@ -30,7 +30,16 @@ class MessagesController < ApplicationController
 
   def create
     @message = @conversation.messages.new(message_params)
+    @conversation = Conversation.find(params[:conversation_id])
+    @message.conversation = @conversation
     if @message.save
+      # ChatChannel.broadcast_to(
+      #   @conversation,
+      #   # # render_to_string(partial: "messages/message", locals: { message: @message })
+      #   # message: render_to_string(partial: "messages/message", locals: { message: @message }),
+      #   # sender_id: @message.user.id
+      # )
+      # head :ok
       redirect_to conversation_messages_path(@conversation)
     end
   end
