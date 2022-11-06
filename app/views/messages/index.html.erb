@@ -1,4 +1,5 @@
-<div class="container">
+<div class="container" data-controller="chat-broadcast"
+    data-chat-broadcast-conversation-id-value="<%= @conversation.id %>">
 
   <% if @over_ten %>
   <%= link_to 'Show Previous', '?m=all' %>
@@ -22,28 +23,16 @@
       <% end %>
   </div>
 
-  <div class="container m-4" data-controller="chat-broadcast"
-    data-chat-broadcast-conversation-id-value="<%= @conversation.id %>">
+  <div class="container m-4">
     <div class="messages" data-chat-broadcast-target="messages">
-      <% @messages.each do |message| %>
-        <% if message.body %>
-            <% user = User.find(message.user_id) %>
-            <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
-              <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
-                <div>
-                  <strong><%= user.email %></strong>
-                  <%= message.message_time %>
-                </div>
-                <%= message.body %>
-              </div>
-            </div>
-        <% end %>
+      <% @conversation.messages.each do |message| %>
+        <%= render "messages/message", message: message %>
       <% end %>
     </div>
   </div>
 
   <div class="container m-4">
-    <%= form_for [@conversation, @message], html: {class: "ui reply form"} do |f| %>
+    <%= simple_form_for [@conversation, @message], html: { data: { action: "turbo:submit-end->chatroom-subscription#resetForm" }} do |f| %>
     <div class="field">
       <%= f.text_area :body, class: "form-control", style: "background: white; margin-bottom: 15px;" %>
     </div>
