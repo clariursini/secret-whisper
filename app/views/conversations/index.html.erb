@@ -20,7 +20,11 @@
                   <%= cl_image_tag conversation.recipient.photo.key, class: "avatar-large" %>
                 <% end %>
               <% else %>
-                <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+                <% if conversation.sender.photo.key != nil %>
+                  <%= cl_image_tag conversation.recipient.photo.key, class: "avatar-large" %>
+                <% else %>
+                  <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+                <% end %>
               <% end %>
 
               <div class="title d-flex">
