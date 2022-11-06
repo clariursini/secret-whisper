@@ -1,12 +1,7 @@
-<% if message.body %>
-  <% user = User.find(message.user_id) %>
-  <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
-    <div class="<%= message.sender?(current_user) ? 'sender-style' : 'receiver-style' %>">
-      <div>
-        <strong><%= user.name %></strong>
-        <%= message.message_time %>
-      </div>
-      <%= message.body %>
-    </div>
-  </div>
-<% end %>
+<div >
+  <small><%= cl_image_tag message.user.photo.key, class: "avatar dropdown-toggle", id: "navbarDropdown", data: { bs_toggle: "dropdown" }, 'aria-haspopup': true, 'aria-expanded': false %>
+    <strong> <%= message.user.name %></strong>
+    <i><%= message.message_time %></i>
+  </small>
+  <p><%= message.body %></p>
+</div>
