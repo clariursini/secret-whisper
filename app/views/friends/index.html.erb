@@ -20,9 +20,14 @@
             </div>
           </div>
 
-          <div class="actions">
-            <%= link_to conversations_path(sender_id: current_user.id, recipient_id: user.id) do  %>
-              <i class="fa-sharp fa-solid fa-comment-dots" ></i>
+          <div class="actions d-flex">
+
+            <%= simple_form_for @conversation do |f| %>
+              <%= hidden_field_tag(:sender_id, current_user.id) %>
+              <%= hidden_field_tag(:recipient_id, user.id) %>
+              <%= f.button :button, style: "padding:0;" do %>
+                <i class="fa-sharp fa-solid fa-comment-dots" ></i>
+              <% end %>
             <% end %>
 
             <%= link_to conversations_path(sender_id: current_user.id, recipient_id: user.id) do  %>
@@ -36,7 +41,9 @@
 
         </div>
       </div>
+    <% end %>
   <% end %>
- <% end %>
  </div>
 </div>
+
+<% console %>
