@@ -8,15 +8,16 @@
         <% else %>
           <% recipient = User.find(conversation.sender_id) %>
         <% end %>
+
         <div class="conversation">
           <div class="conversation-content d-flex align-items-center justify-content-between">
 
             <div class="content d-flex align-items-center" style="margin-right:20px;">
-              <% if conversation.recipient.id == current_user.id %>
-                <% if conversation.recipient.photo.key != nil %>
+              <% if conversation.recipient.photo.key != nil || conversation.sender.photo.key != nil %>
+                <% if conversation.recipient_id == current_user.id %>
                   <%= cl_image_tag conversation.sender.photo.key, class: "avatar-large" %>
                 <% else %>
-                  <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+                  <%= cl_image_tag conversation.recipient.photo.key, class: "avatar-large" %>
                 <% end %>
               <% else %>
                 <% if conversation.sender.photo.key != nil %>
@@ -27,7 +28,7 @@
               <% end %>
 
               <div class="title d-flex">
-                <strong><%= link_to "#{recipient.name} (#{conversation.recipient.age})", conversation_messages_path(conversation), style:"margin-right: 15px;" %></strong>
+                <strong><%= link_to "#{recipient.name} (#{conversation.recipient.age})", conversation_path(conversation), style:"margin-right: 15px;" %></strong>
               </div>
             </div>
 
