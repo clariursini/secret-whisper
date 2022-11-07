@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(*)
-    # stored_location_for(resource) || welcome_path
+    # welcome_path
     friends_path
   end
 end
