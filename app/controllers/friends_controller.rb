@@ -3,6 +3,7 @@ class FriendsController < ApplicationController
     @users = User.all
     @conversations = Conversation.all
     @conversation = Conversation.new
+    # agregar un filtro para que solo sean los de ese bar
   end
 
   def show
