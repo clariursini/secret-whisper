@@ -12,7 +12,9 @@
       <ul class="navbar-nav me-auto">
         <% if user_signed_in? %>
           <li class="nav-item active">
-            <strong><p class="nav-link"><%= current_user.name%></p></strong>
+            <%= link_to edit_user_registration_path, class: "nav-link" do %>
+              <strong><p><%= current_user.name%></p></strong>
+            <% end %>
           </li>
           <li class="nav-item active">
             <%= link_to "Home", root_path, class: "nav-link" %>
@@ -31,7 +33,7 @@
             <% end %>
 
               <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
-                <%= link_to "Edit User", "#", class: "dropdown-item" %>
+                <%= link_to "Edit User", edit_user_registration_path, class: "dropdown-item" %>
                 <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item" %>
               </div>
           </li>
