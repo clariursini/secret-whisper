@@ -1,27 +1,57 @@
-<div class="container m-5">
- <h3>All Users</h3>
+<div class="container mt-4">
+  <%# <h3>All Users</h3> %>
+
+  <div class="notification user-card">
+    <%= link_to edit_user_registration_path do %>
+      <% if current_user.photo.key != nil %>
+        <%= cl_image_tag current_user.photo.key, class: "avatar-xxl" %>
+      <% else %>
+        <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xxl" %>
+      <% end %>
+    <% end %>
+    <div class="notification-content">
+      <%= link_to edit_user_registration_path do %>
+        <p><strong><%= current_user.name %></strong></p>
+      <% end %>
+    </div>
+
+    <div class="notification-actions d-flex flex-column align-items-center justify-items-center">
+      <div class="mb-2 mt-2">
+        <%= link_to conversations_path do  %>
+          <i class="fa-sharp fa-solid fa-comment-dots" style="margin-left: 0;"></i>
+        <% end %>
+
+        <%= link_to "#" do  %>
+          <i class="fa-solid fa-beer-mug-empty"></i>
+        <% end %>
+      </div>
+
+      <%= link_to "#" do  %>
+        <i class="fa-sharp fa-solid fa-gamepad" style="margin-left: 0;"></i>
+      <% end %>
+
+    </div>
+  </div>
+
   <div class="list">
+
    <% @users.each do |user| %>
     <% if user.id != current_user.id %>
-     <div class="conversation">
-        <div class="conversation-content d-flex align-items-center justify-content-between">
 
-          <div class="content d-flex align-items-center" style="margin-right:20px;">
+        <div class="notification">
+          <%= link_to profile_path(recipient_id: user.id) do %>
             <% if user.photo.key != nil %>
-              <%= cl_image_tag user.photo.key, class: "avatar-large" %>
+              <%= cl_image_tag user.photo.key, class: "avatar-xl" %>
             <% else %>
-              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
             <% end %>
-
-            <div class="title d-flex">
-              <%= link_to profile_path(recipient_id: user.id) do %>
-                <p><strong><%= user.name %></strong> (<%= user.age %>)</p>
-              <% end %>
-            </div>
+          <% end %>
+          <div class="notification-content">
+            <%= link_to profile_path(recipient_id: user.id) do %>
+              <p><strong><%= user.name %></strong> (<%= user.age %>)</p>
+            <% end %>
           </div>
-
-          <div class="actions d-flex">
-
+          <div class="notification-actions">
             <%= simple_form_for @conversation do |f| %>
               <%= hidden_field_tag(:sender_id, current_user.id) %>
               <%= hidden_field_tag(:recipient_id, user.id) %>
@@ -30,17 +60,16 @@
               <% end %>
             <% end %>
 
-            <%= link_to conversations_path(sender_id: current_user.id, recipient_id: user.id) do  %>
+            <%= link_to "#" do  %>
               <i class="fa-solid fa-beer-mug-empty" ></i>
             <% end %>
 
-            <%= link_to conversations_path(sender_id: current_user.id, recipient_id: user.id) do  %>
+            <%= link_to "#" do  %>
               <i class="fa-sharp fa-solid fa-gamepad" ></i>
             <% end %>
           </div>
-
         </div>
-      </div>
+
     <% end %>
   <% end %>
  </div>
