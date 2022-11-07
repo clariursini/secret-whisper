@@ -4,9 +4,9 @@
 
   <div class="profile-photo">
     <% if current_user.photo.key != nil %>
-      <%= cl_image_tag current_user.photo.key, class: "avatar-xxl" %>
+      <%= cl_image_tag current_user.photo.key, class: "profile-photo" %>
     <% else %>
-      <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xxl" %>
+      <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "profile-photo" %>
     <% end %>
   </div>
 
@@ -14,7 +14,7 @@
     <%= f.error_notification %>
 
     <div class="form-inputs">
-      <%= f.input :photo, as: :file, label: "Load or update your profile picture" %>
+      <%= f.input :photo, as: :file, label: "Upload your profile picture" %>
       <%#= f.input :email, required: true, autofocus: true %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
@@ -23,16 +23,26 @@
 
       <%= f.input :description,
                   required: false,
-                  label: false,
-                  input_html: { autocomplete: "age" } %>
+                  label: "About me",
+                  input_html: { autocomplete: "about-me" } %>
       <%= f.input :name,
                   required: false,
-                  label: false,
-                  input_html: { autocomplete: "name" } %>
+                  label: "Name",
+                  input_html: { autocomplete: "Name" } %>
       <%= f.input :age,
                   required: false,
-                  label: false,
-                  input_html: { autocomplete: "age" } %>
+                  label: "Age",
+                  input_html: { autocomplete: "Age" } %>
+      <%= f.input :gender,
+                  as: :select, collection: ["Female", "Male", "Other"],
+                  required: false,
+                  label: "Gender",
+                  input_html: { multiple: false, autocomplete: "Gender" } %>
+      <%= f.input :interests,
+                  as: :select, collection: ["Female", "Male", "Other", "Both"],
+                  required: false,
+                  label: "Interested in:",
+                  input_html: { multiple: false, autocomplete: "Interests" } %>
       <%#= f.input :password,
                   hint: "leave it blank if you don't want to change it",
                   required: false,
