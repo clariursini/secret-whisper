@@ -1,7 +1,7 @@
 <div class="container mt-4">
   <div class="profile-photo">
       <% if @user.photo.key != nil %>
-        <%= cl_image_tag @user.photo.key, class: "avatar-xxl" %>
+        <%= cl_image_tag @user.photo.key %>
       <% else %>
         <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xxl" %>
       <% end %>
