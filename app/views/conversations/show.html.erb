@@ -2,10 +2,6 @@
     data-chat-broadcast-conversation-id-value="<%= @conversation.id %>"
     data-chat-broadcast-current-user-id-value="<%= current_user.id %>">
 
-  <% if @over_ten %>
-  <%= link_to 'Show Previous', '?m=all' %>
-  <% end %>
-
   <div class="container d-flex align-items-center">
       <% if @conversation.recipient_id == current_user.id %>
         <% if @conversation.sender.photo.key != nil %>
@@ -26,6 +22,9 @@
 
   <div class="container mt-3">
     <div class="messages" data-chat-broadcast-target="messages">
+      <% if @over_ten %>
+        <%= link_to 'Show Previous', '?m=all' %>
+      <% end %>
       <% @conversation.messages.each do |message| %>
         <% if message.body %>
           <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
