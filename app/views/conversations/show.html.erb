@@ -1,4 +1,4 @@
-<div class="container" data-controller="chat-broadcast"
+<div class="container mt-3" data-controller="chat-broadcast"
     data-chat-broadcast-conversation-id-value="<%= @conversation.id %>"
     data-chat-broadcast-current-user-id-value="<%= current_user.id %>">
 
@@ -6,7 +6,7 @@
   <%= link_to 'Show Previous', '?m=all' %>
   <% end %>
 
-  <div class="container m-4 d-flex align-items-center">
+  <div class="container d-flex align-items-center">
       <% if @conversation.recipient_id == current_user.id %>
         <% if @conversation.sender.photo.key != nil %>
           <%= cl_image_tag @conversation.sender.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
@@ -24,7 +24,7 @@
       <% end %>
   </div>
 
-  <div class="container m-4">
+  <div class="container mt-3">
     <div class="messages" data-chat-broadcast-target="messages">
       <% @conversation.messages.each do |message| %>
         <% if message.body %>
@@ -38,7 +38,7 @@
     </div>
   </div>
 
-  <div class="container m-4">
+  <div class="container mt-3">
     <%= simple_form_for [@conversation, @message], html: { data: { action: "turbo:submit-end->chat-broadcast#resetForm" }} do |f| %>
     <div class="field">
       <%= f.text_area :body, class: "form-control", style: "background: white; margin-bottom: 15px;" %>
