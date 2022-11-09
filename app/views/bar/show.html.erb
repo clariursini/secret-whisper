@@ -53,13 +53,7 @@
             <% end %>
           </div>
           <div class="notification-actions">
-            <%= simple_form_for @conversation do |f| %>
-              <%= hidden_field_tag(:sender_id, current_user.id) %>
-              <%= hidden_field_tag(:recipient_id, user.id) %>
-              <%= f.button :button, style: "padding:0;" do %>
-                <i class="fa-sharp fa-solid fa-comment-dots" ></i>
-              <% end %>
-            <% end %>
+           
 
             <%= link_to "#" do  %>
               <i class="fa-solid fa-beer-mug-empty" ></i>
