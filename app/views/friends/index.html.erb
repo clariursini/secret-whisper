@@ -60,8 +60,34 @@
               <% end %>
             <% end %>
 
-            <%= link_to "#" do  %>
-              <i class="fa-solid fa-beer-mug-empty" ></i>
+            <% @beerTarget = @beers.where(sender_id: current_user.id, recipient_id: user.id).first  %>
+            <% if @beerTarget.present? %>
+              <div data-controller="beer-delete">
+                <%= simple_form_for @beerTarget, url: beer_path(@beerTarget), method: :delete do |f| %>
+                  <%= hidden_field_tag(:sender_id, current_user.id) %>
+                  <%= hidden_field_tag(:recipient_id, user.id) %>
+                  <%= f.button :button, style: "padding:0;" do %>
+                    <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i>
+                  <% end %>
+                <% end %>
+              </div>
+
+              <%# <div data-controller="beer-delete"> %>
+                <%#= link_to beer_path(@beerTarget), data: {turbo_method: :delete} do %>
+                  <%# <i class="fa-solid fa-champagne-glasses" style="padding:0;" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i> %>
+                <%#end %>
+              <%# </div> %>
+
+            <% else %>
+              <div data-controller="beer-icon">
+                <%= simple_form_for @beer do |f| %>
+                  <%= hidden_field_tag(:sender_id, current_user.id) %>
+                  <%= hidden_field_tag(:recipient_id, user.id) %>
+                  <%= f.button :button, style: "padding:0;" do %>
+                    <i class="fa-solid fa-beer-mug-empty" data-beer-icon-target="beer" data-action="click->beer-icon#addBeer"></i>
+                  <% end %>
+                <% end %>
+              </div>
             <% end %>
 
             <%= link_to "#" do  %>
@@ -74,3 +100,5 @@
   <% end %>
  </div>
 </div>
+
+<% console %>

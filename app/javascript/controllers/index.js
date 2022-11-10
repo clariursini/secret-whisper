@@ -4,6 +4,12 @@
 
 import { application } from "./application"
 
+import BeerDeleteController from "./beer_delete_controller"
+application.register("beer-delete", BeerDeleteController)
+
+import BeerIconController from "./beer_icon_controller"
+application.register("beer-icon", BeerIconController)
+
 import ChatBroadcastController from "./chat_broadcast_controller"
 application.register("chat-broadcast", ChatBroadcastController)
 
