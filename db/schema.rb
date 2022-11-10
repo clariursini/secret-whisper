@@ -63,6 +63,13 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_231114) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "games", force: :cascade do |t|
+    t.integer "player1"
+    t.integer "player2"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "messages", force: :cascade do |t|
     t.text "body"
     t.bigint "conversation_id"
@@ -72,6 +79,16 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_07_231114) do
     t.datetime "updated_at", null: false
     t.index ["conversation_id"], name: "index_messages_on_conversation_id"
     t.index ["user_id"], name: "index_messages_on_user_id"
+  end
+
+  create_table "results", force: :cascade do |t|
+    t.bigint "game_id"
+    t.bigint "user_id"
+    t.integer "score"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_results_on_game_id"
+    t.index ["user_id"], name: "index_results_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|
