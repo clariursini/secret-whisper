@@ -13,4 +13,5 @@ Rails.application.routes.draw do
 
   get 'friends', to: 'friends#index', as: 'friends'
   get 'profile', to: 'friends#show', as: 'profile'
+  get 'bar', to: 'bar#show', as: 'bar'
 end
