@@ -1,8 +1,9 @@
-<div class="banner text-center d-flex align-items-center" style="background-image: linear-gradient(rgba(0,0,0,0.4),rgba(0,0,0,0.4)), url(https://images.unsplash.com/photo-1483706600674-e0c87d3fe85b?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1207&q=80); height: 100vh;">
+<div class="banner text-center d-flex align-items-center" style="background-color: black; height: 100vh;">
   <div class="container d-flex flex-column p-4">
-    <h1 class="mb-4">Bienvenidos a Secret Whispers</h1>
-    <p class="mb-5">Interactua con la gente que esta en tu bar</p>
-    <div class="container d-flex flex-column pl-5 pr-5">
+    <%= image_tag("breakit-crop") %>
+    <h1 class="mb-3">The ultimate ice breaker</h1>
+    <p class="mb-5">Interact with people around you</p>
+    <div class="container d-flex flex-column pl-5 pr-5" style="align-items: center;">
       <%= link_to 'Login', new_user_session_path, class: "btn btn-primary mb-3" %>
       <%= link_to 'Sing Up', new_user_registration_path, class: "btn btn-primary mb-3" %>
       <%= link_to 'Sing Up with Google', new_user_registration_path, class: "btn btn-primary mb-3" %>
@@ -11,7 +12,7 @@
   </div>
 </div>
 
-<div class="banner text-center d-flex flex-column align-items-center justify-content-center p-5" >
-  <h2 class="mb-4">Secret Whispers</h2>
+<div class="text-center d-flex flex-column align-items-center justify-content-center p-5" >
+  <h2 class="mb-4">Break It</h2>
   <p style="color: black;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam unde incidunt optio porro libero eligendi ab officia illum esse? Nisi vero soluta doloribus neque doloremque iusto mollitia sequi, minus nulla!</p>
 </div>
