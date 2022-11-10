@@ -20,26 +20,35 @@
                   <%= link_to profile_path(sender_id: conversation.sender.id) do %>
                     <%= cl_image_tag conversation.sender.photo.key, class: "avatar-large" %>
                   <% end %>
+                  <div class="notification-content">
+                    <strong><%= link_to "#{recipient.name} (#{conversation.recipient.age})", profile_path(sender_id: conversation.sender.id), style:"margin-right: 15px;" %></strong>
+                  </div>
                 <% else %>
                   <%= link_to profile_path(recipient_id: conversation.recipient.id) do %>
                     <%= cl_image_tag conversation.recipient.photo.key, class: "avatar-large" %>
                   <% end %>
+                  <div class="notification-content">
+                    <strong><%= link_to "#{recipient.name} (#{conversation.recipient.age})", profile_path(sender_id: conversation.recipient.id), style:"margin-right: 15px;" %></strong>
+                  </div>
                 <% end %>
               <% else %>
                 <% if conversation.recipient_id == current_user.id %>
                   <%= link_to profile_path(sender_id: conversation.sender.id) do %>
                     <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
                   <% end %>
+                  <div class="notification-content">
+                    <strong><%= link_to "#{recipient.name} (#{conversation.recipient.age})", profile_path(sender_id: conversation.sender.id), style:"margin-right: 15px;" %></strong>
+                  </div>
                 <% else %>
                   <%= link_to profile_path(recipient_id: conversation.recipient.id) do %>
                     <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
                   <% end %>
+                  <div class="notification-content">
+                    <strong><%= link_to "#{recipient.name} (#{conversation.recipient.age})", profile_path(sender_id: conversation.recipient.id), style:"margin-right: 15px;" %></strong>
+                  </div>
                 <% end %>
               <% end %>
 
-              <div class="notification-content">
-                <strong><%= link_to "#{recipient.name} (#{conversation.recipient.age})", conversation_path(conversation), style:"margin-right: 15px;" %></strong>
-              </div>
             <%# </div> %>
 
             <div class="notification-actions">
