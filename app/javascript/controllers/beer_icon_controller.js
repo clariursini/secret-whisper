@@ -11,7 +11,7 @@ export default class extends Controller {
   }
 
   addBeer() {
-    this.beerTarget.classList.remove("fa-beer-mug-empty")
+    this.beerTarget.classList.toggle("fa-beer-mug-empty")
     this.beerTarget.classList.add("fa-champagne-glasses")
     // location.reload();
   }

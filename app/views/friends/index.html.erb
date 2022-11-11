@@ -61,6 +61,7 @@
             <% end %>
 
             <% @beerTarget = @beers.where(sender_id: current_user.id, recipient_id: user.id).first  %>
+
             <% if @beerTarget.present? %>
               <div data-controller="beer-delete">
                 <%= simple_form_for @beerTarget, url: beer_path(@beerTarget), method: :delete do |f| %>
@@ -100,3 +101,5 @@
   <% end %>
  </div>
 </div>
+
+<% console %>
