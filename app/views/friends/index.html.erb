@@ -21,7 +21,7 @@
           <i class="fa-sharp fa-solid fa-comment-dots" style="margin-left: 0;"></i>
         <% end %>
 
-        <%= link_to "#" do  %>
+        <%= link_to beers_path do  %>
           <i class="fa-solid fa-beer-mug-empty"></i>
         <% end %>
       </div>
@@ -51,6 +51,7 @@
               <p><strong><%= user.name %></strong> (<%= user.age %>)</p>
             <% end %>
           </div>
+
           <div class="notification-actions">
             <%= simple_form_for @conversation do |f| %>
               <%= hidden_field_tag(:sender_id, current_user.id) %>
@@ -101,5 +102,3 @@
   <% end %>
  </div>
 </div>
-
-<% console %>

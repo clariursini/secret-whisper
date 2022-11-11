@@ -1,4 +1,8 @@
 class BeersController < ApplicationController
+  def index
+    @beers = Beer.where(recipient_id: current_user).order(created_at: :desc)
+    @beer = Beer.new
+  end
 
   def create
     if Beer.between(params[:sender_id], params[:recipient_id]).present?

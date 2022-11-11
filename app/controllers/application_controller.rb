@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_root_path
-    friends_path
+    bar_path
   end
 end

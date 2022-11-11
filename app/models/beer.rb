@@ -5,6 +5,6 @@ class Beer < ApplicationRecord
   validates_uniqueness_of :sender_id, :scope => :recipient_id
 
   scope :between, -> (sender_id, recipient_id) do
-    where("(beers.sender_id = ? AND beers.recipient_id =?) OR (beers.sender_id = ? AND beers.recipient_id =?)", sender_id, recipient_id, recipient_id, sender_id)
+    where("(beers.sender_id = ? AND beers.recipient_id =?)", sender_id, recipient_id)
   end
 end

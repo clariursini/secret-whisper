@@ -2,6 +2,9 @@ class BarController < ApplicationController
   def show
     @bar = Bar.find(current_user.bar_code)
     @users = User.where(bar_code: current_user.bar_code)
+    @conversation = Conversation.new
+    @beer = Beer.new
+    @beers = Beer.all
   end
 
   def barcode
