@@ -1,0 +1,73 @@
+<div class="container mt-3">
+  <h3>Games Played</h3>
+
+  <div class="list">
+
+    <% @games.each do |game| %>
+      <% if game.player1_id == current_user.id || game.player2_id == current_user.id %>
+        <% if game.player1_id == current_user.id %>
+          <% opponent = User.find(game.player2_id) %>
+        <% else %>
+          <% opponent = User.find(game.player1_id) %>
+        <% end %>
+
+        <div class="notification">
+          <% if game.opponent.photo.key != nil %>
+
+            <% if game.player1_id == current_user.id %>
+              <%= link_to profile_path(player2_id: opponent.id) do %>
+                <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
+              <% end %>
+            <% else %>
+              <%= link_to profile_path(player1_id: opponent.id) do %>
+                <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
+              <% end %>
+            <% end %>
+            <div class="notification-content">
+              <strong><%= link_to "#{opponent.name} (#{opponent.age})", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
+            </div>
+
+          <% else %>
+
+            <% if game.player1_id == current_user.id %>
+              <%= link_to profile_path(player2_id: opponent.id) do %>
+                <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+              <% end %>
+            <% else %>
+              <%= link_to profile_path(player1_id: opponent.id) do %>
+                <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+              <% end %>
+            <% end %>
+            <div class="notification-content">
+              <strong><%= link_to "#{opponent.name} (#{opponent.age})", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
+            </div>
+
+          <% end %>
+
+          <div class="notification-actions">
+          <% if game.winner_id != nil %>
+              <% if game.player1_id == current_user.id %>
+                <%= simple_form_for @game do |f| %>
+                  <%= hidden_field_tag(:player1_id, current_user.id) %>
+                  <%= hidden_field_tag(:player2_id, opponent.id) %>
+                  <%= f.button :button, style: "padding:0;" do %>
+                    <i class="fa-sharp fa-solid fa-gamepad" ></i>
+                  <% end %>
+                <% end %>
+              <% else %>
+                <%= simple_form_for @conversation do |f| %>
+                  <%= hidden_field_tag(:player1_id, opponent.id) %>
+                  <%= hidden_field_tag(:player2_id, urrent_user.id) %>
+                  <%= f.button :button, style: "padding:0;" do %>
+                    <i class="fa-sharp fa-solid fa-gamepad" ></i>
+                  <% end %>
+                <% end %>
+              <% end %>
+            <% end %>
+          </div>
+
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
