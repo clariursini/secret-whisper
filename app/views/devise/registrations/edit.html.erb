@@ -62,7 +62,7 @@
         <%= f.button :submit, "Save Changes", class: "btn btn-primary", style: "margin-right: 10px;" %>
       </div>
       <div class="form-actions">
-        <%= link_to "Skip", bar_path, class: "btn btn-primary" %>
+        <%= link_to "Skip", bar_path(current_user.bar_code), class: "btn btn-primary" %>
       </div>
     </div>
   <% end %>

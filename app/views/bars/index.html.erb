@@ -1,0 +1,30 @@
+<div class="container mt-4">
+  <h1>Bars</h1>
+  <% @bars.each do |bar| %>
+
+    <div class="list">
+      <div class="notification">
+        <div class="notification-content">
+          <%= link_to bar_path(bar) do %>
+            <p><strong><%= bar.name %></strong> (Id: <%= bar.id %>)</p>
+          <% end %>
+        </div>
+
+        <div class="notification-actions">
+          <%= simple_form_for bar, url: bar_path(bar), method: :delete do |f| %>
+            <%= f.button :button, style: "padding:0;" do %>
+              <i class="fa-solid fa-trash"></i>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+
+  <% end %>
+
+  <div class="list">
+    <div class="notification d-flex justify-content-center align-items-center">
+      <%= link_to "Create a Bar", new_bar_path %>
+    </div>
+  </div>
+</div>

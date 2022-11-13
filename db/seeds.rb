@@ -17,6 +17,7 @@ puts "Creating Bars"
 # bar1 = Bar.create!(name: "Home")
 bar2 = Bar.create!(name: "Little Bar")
 bar3 = Bar.create!(name: "Moe's Bar")
+bar4 = Bar.create!(name: "N4L Club")
 
 puts "Created Bars"
 
