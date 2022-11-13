@@ -26,7 +26,7 @@
         <% end %>
       </div>
 
-      <%= link_to "#" do  %>
+      <%= link_to games_path do  %>
         <i class="fa-sharp fa-solid fa-gamepad" style="margin-left: 0;"></i>
       <% end %>
 
@@ -93,7 +93,18 @@
                   </div>
                 <% end %>
 
-                <%= link_to "#" do  %>
+                <div>
+                  <%= simple_form_for @game do |f| %>
+                    <%= hidden_field_tag(:player1_id, current_user.id) %>
+                    <%= hidden_field_tag(:player2_id, user.id) %>
+                    <%= hidden_field_tag(:winner_id, nil) %>
+                    <%= f.button :button, style: "padding:0;" do %>
+                      <i class="fa-sharp fa-solid fa-gamepad"></i>
+                    <% end %>
+                  <% end %>
+                </div>
+
+                <%= link_to new_game_path(player1_id: current_user.id, player2_id: user.id) do  %>
                   <i class="fa-sharp fa-solid fa-gamepad" ></i>
                 <% end %>
               </div>
@@ -110,3 +121,5 @@
     </div>
   <% end %>
 </div>
+
+<% console %>
