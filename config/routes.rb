@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :beers
+  resources :games
 
   get 'friends', to: 'friends#index', as: 'friends'
   get 'profile', to: 'friends#show', as: 'profile'
