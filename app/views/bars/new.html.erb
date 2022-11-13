@@ -1,4 +1,10 @@
-<%= simple_form_for @barsito do |f| %>
-  <%= f.input :name %>
-  <%= f.button :submit %>
-<% end %>
+<div class="container mt-4">
+  <h3>Create a new bar</h1>
+  <div class="container mt-4 p-4" style= "background: white;">
+    <%= simple_form_for @barsito do |f| %>
+      <%= f.input :name %>
+      <%= f.button :submit, class: "btn btn-primary" %>
+    <% end %>
+  </div>
+  <%= link_to "Back", bars_path, class: "btn btn-primary mt-4" %>
+</div>
