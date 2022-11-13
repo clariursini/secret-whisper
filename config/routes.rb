@@ -10,9 +10,10 @@ Rails.application.routes.draw do
   end
 
   resources :beers
+  resources :bars
 
   get 'friends', to: 'friends#index', as: 'friends'
   get 'profile', to: 'friends#show', as: 'profile'
-  get 'bar', to: 'bar#show', as: 'bar'
-  get 'barcode/:id', to: 'bar#barcode', as: 'barcode'
+  # get 'bar', to: 'bar#show', as: 'bar'
+  get 'barcode/:id', to: 'bars#barcode', as: 'barcode'
 end
