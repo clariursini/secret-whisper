@@ -5,6 +5,8 @@ class BarController < ApplicationController
     @conversation = Conversation.new
     @beer = Beer.new
     @beers = Beer.all
+    @game = Game.new
+    @games = Game.all
   end
 
   def barcode
