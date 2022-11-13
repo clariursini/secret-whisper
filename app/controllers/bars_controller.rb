@@ -34,7 +34,7 @@ class BarsController < ApplicationController
     @user = User.find(current_user.id)
     @user.bar_code = params[:id]
     @user.save
-    redirect_to bar_path(@user.bar_code)
+    redirect_to bar_path(current_user.bar_code)
   end
 
   private
