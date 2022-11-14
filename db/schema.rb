@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_11_13_183849) do
+ActiveRecord::Schema[7.0].define(version: 2022_11_14_123843) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -71,6 +71,7 @@ ActiveRecord::Schema[7.0].define(version: 2022_11_13_183849) do
     t.integer "winner_id"
     t.string "hand1"
     t.string "hand2"
+    t.string "draw"
   end
 
   create_table "messages", force: :cascade do |t|
