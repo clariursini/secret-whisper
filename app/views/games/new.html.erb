@@ -22,6 +22,7 @@
             <%= hidden_field_tag(:player1_id, current_user.id) %>
             <%= hidden_field_tag(:player2_id, opponent.id) %>
             <div class="field">
+            <%#= f.input :hand1, as: :radio_buttons, collection: ["Rock", "Paper", "Scissors"] %>
             <%= f.input :hand1, as: :select, collection: ["Rock", "Paper", "Scissors"] %>
             </div>
             <div>
