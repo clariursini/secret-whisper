@@ -16,6 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   def user_root_path
-    bar_path
+    bar_path(current_user.bar_code)
   end
 end
