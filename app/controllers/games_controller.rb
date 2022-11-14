@@ -39,33 +39,43 @@ class GamesController < ApplicationController
 
   def update
     @game = Game.find(params[:id])
+    @game.update(game_params)
 
     if @game.hand1 == "Paper" && @game.hand2 == "Rock"
       @game.winner_id = @game.player1_id
+      @game.save!
     elsif @game.hand1 == "Paper" && @game.hand2 == "Scissors"
       @game.winner_id = @game.player2_id
+      @game.save!
     elsif @game.hand1 == "Paper" && @game.hand2 == "Paper"
       @game.winner_id = @game.player1_id
+      @game.draw = "Draw"
+      @game.save!
 
     elsif @game.hand1 == "Rock" && @game.hand2 == "Paper"
       @game.winner_id = @game.player2_id
+      @game.save!
     elsif @game.hand1 == "Rock" && @game.hand2 == "Scissors"
       @game.winner_id = @game.player1_id
+      @game.save!
     elsif @game.hand1 == "Rock" && @game.hand2 == "Rock"
       @game.winner_id = @game.player1_id
+      @game.draw = "Draw"
+      @game.save!
 
     elsif @game.hand1 == "Scissors" && @game.hand2 == "Paper"
       @game.winner_id = @game.player1_id
+      @game.save!
     elsif @game.hand1 == "Scissors" && @game.hand2 == "Rock"
       @game.winner_id = @game.player2_id
+      @game.save!
     elsif @game.hand1 == "Scissors" && @game.hand2 == "Scissors"
       @game.winner_id = @game.player1_id
-
+      @game.draw = "Draw"
+      @game.save!
     end
 
-    if @game.update(game_params)
-      redirect_to game_path(@game)
-    end
+    redirect_to game_path(@game)
 
   end
 
