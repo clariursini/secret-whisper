@@ -1,0 +1,38 @@
+<div class="container mt-3">
+    <h3>Edit Game</h1>
+
+    <% if @game.player1_id == current_user %>
+      <% opponent = User.find(@game.player2_id) %>
+    <% else %>
+      <% opponent = User.find(@game.player2_id) %>
+    <% end %>
+
+    <div class="container d-flex align-items-center">
+
+      <% if opponent.photo.key != nil %>
+        <%= cl_image_tag opponent.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
+      <% else %>
+        <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
+      <% end %>
+
+      <h1 style="margin:0"><%= opponent.name %></h1>
+
+    </div>
+
+    <div class="container mt-3">
+      <div class="messages">
+        <p>Choose your hand</p>
+          <%= simple_form_for @game do |f| %>
+            <div class="field">
+            <%= f.input :hand2, as: :select, collection: ["Rock", "Paper", "Scissors"] %>
+            </div>
+            <div>
+              <%= f.button :submit, class: "btn btn-primary" %>
+            </div>
+          <% end %>
+      </div>
+    </div>
+
+</div>
+
+<% console %>
