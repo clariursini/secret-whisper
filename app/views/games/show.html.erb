@@ -1,13 +1,193 @@
-<h1>Game show</h1>
+<div class="container mt-4">
 
-<% if @game.winner_id != nil %>
-  <p>The winner is</p>
-  <% winner = @game.winner_id %>
-  <%= User.find(winner).name  %>
-<% end %>
+  <h3>Game show</h1>
 
-<% if @game.winner_id == nil %>
-  <p>Your move was</p>
-  <strong><%= @game.hand1 %></strong>
-  <p>Waiting for opponent to play his/her move</p>
-<% end %>
+  <%# IF THE GAME IS FINISHED %>
+  <% if @game.winner_id != nil  %>
+    <div class="row d-flex notification">
+      <div class="column col-6 text-center">
+        <% @player1 = User.find(@game.player1_id) %>
+        <p class="mb-2">Player 1</p>
+
+        <div class="profile-user">
+          <%= link_to profile_path(@player1) do %>
+            <% if @player1.photo.key != nil %>
+              <%= cl_image_tag @player1.photo.key, class: "avatar" %>
+            <% else %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+            <% end %>
+          <% end %>
+
+          <div class="notification-content">
+            <%= link_to profile_path(@player1) do %>
+              <p><strong><%=@player1.name %></strong></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="move mt-3">
+          <p class="mb-2">Move:</p>
+
+          <% if @game.hand1 == "Scissors" %>
+            <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+          <% end %>
+
+          <% if @game.hand1 == "Rock" %>
+            <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+          <% end %>
+
+          <% if @game.hand1 == "Paper" %>
+            <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="column col-6 text-center">
+        <% @player2 = User.find(@game.player2_id) %>
+        <p class="mb-2">Player 2</p>
+
+        <div class="profile-user">
+          <%= link_to profile_path(@player2) do %>
+            <% if @player2.photo.key != nil %>
+              <%= cl_image_tag @player2.photo.key, class: "avatar" %>
+            <% else %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+            <% end %>
+          <% end %>
+
+          <div class="notification-content">
+            <%= link_to profile_path(@player2) do %>
+              <p><strong><%=@player2.name %></strong></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="move mt-3">
+          <p class="mb-2">Move:</p>
+
+          <% if @game.hand2 == "Scissors" %>
+            <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+          <% end %>
+
+          <% if @game.hand2 == "Rock" %>
+            <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+          <% end %>
+
+          <% if @game.hand2 == "Paper" %>
+            <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+          <% end %>
+        </div>
+
+      </div>
+    </div>
+
+    <%# IF THE GAME IS FINISHED AND IT IS NOT A DRAW %>
+    <% if @game.draw == nil %>
+
+      <div class="row notification text-center">
+        <p class= "mb-2">The winner is</p>
+        <% @winner = User.find(@game.winner_id) %>
+
+        <div class="profile-user">
+          <%= link_to profile_path(@winner) do %>
+            <% if @winner.photo.key != nil %>
+              <%= cl_image_tag @winner.photo.key, class: "avatar" %>
+            <% else %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+            <% end %>
+          <% end %>
+
+          <div class="notification-content">
+            <%= link_to profile_path(@winner) do %>
+              <p><strong><%=@winner.name %></strong></p>
+            <% end %>
+          </div>
+        </div>
+
+      </div>
+
+    <%# IF THE GAME IS FINISHED AND IT IS A DRAW %>
+    <% else %>
+      <div class="row notification text-center">
+        <strong><p>It is a draw</p></strong>
+      </div>
+    <% end %>
+  <% end %>
+
+  <%# IF THE GAME IS NOT FINISHED %>
+  <% if @game.winner_id == nil %>
+
+    <div class="row d-flex notification">
+      <div class="column col-6 text-center">
+        <% @player1 = User.find(@game.player1_id) %>
+        <p class="mb-2">Player 1</p>
+
+        <div class="profile-user">
+          <%= link_to profile_path(@player1) do %>
+            <% if @player1.photo.key != nil %>
+              <%= cl_image_tag @player1.photo.key, class: "avatar" %>
+            <% else %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+            <% end %>
+          <% end %>
+
+          <div class="notification-content">
+            <%= link_to profile_path(@player1) do %>
+              <p><strong><%=@player1.name %></strong></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="move mt-3">
+          <p class="mb-2">Move:</p>
+
+          <% if @game.hand1 == "Scissors" %>
+            <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+          <% end %>
+
+          <% if @game.hand1 == "Rock" %>
+            <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+          <% end %>
+
+          <% if @game.hand1 == "Paper" %>
+            <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+          <% end %>
+        </div>
+      </div>
+
+      <div class="column col-6 text-center">
+        <% @player2 = User.find(@game.player2_id) %>
+        <p class="mb-2">Player 2</p>
+
+        <div class="profile-user">
+          <%= link_to profile_path(@player2) do %>
+            <% if @player2.photo.key != nil %>
+              <%= cl_image_tag @player2.photo.key, class: "avatar" %>
+            <% else %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+            <% end %>
+          <% end %>
+
+          <div class="notification-content">
+            <%= link_to profile_path(@player2) do %>
+              <p><strong><%=@player2.name %></strong></p>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="move mt-3">
+          <p class="mb-2">Move:</p>
+          <i class="fa-solid fa-hourglass-start mb-2" style="font-size: 45px;"></i>
+        </div>
+      </div>
+    </div>
+
+    <div class="row notification text-center">
+      <strong><p>Waiting for opponent to play his/her move</p></strong>
+    </div>
+
+  <% end %>
+
+</div>
+
+<% console %>
