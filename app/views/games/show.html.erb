@@ -1,0 +1,13 @@
+<h1>Game show</h1>
+
+<% if @game.winner_id != nil %>
+  <p>The winner is</p>
+  <% winner = @game.winner_id %>
+  <%= User.find(winner).name  %>
+<% end %>
+
+<% if @game.winner_id == nil %>
+  <p>Your move was</p>
+  <strong><%= @game.hand1 %></strong>
+  <p>Waiting for opponent to play his/her move</p>
+<% end %>
