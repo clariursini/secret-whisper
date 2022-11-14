@@ -99,6 +99,9 @@
                   b. Si tiene winner --> te lleva al new (Done) %>
 
                 <%# Juego Nuevo %>
+                <%# 1. Si no hay un juego entre esos dos jugadores --> te lleva al new
+                    2. Si hay un juego entre dos jugadores y
+                       b. El juego tiene winner --> te lleva al new %>
                 <% @newGame = Game.between(current_user, user) %>
                 <% if @newGame == [] || @newGame.last.winner_id != nil %>
                   <%= link_to new_game_path(player1_id: current_user.id, player2_id: user.id) do  %>
@@ -107,18 +110,22 @@
                 <% end %>
 
                 <%# Edit Juego %>
+                <%# 2. Si hay un juego entre dos jugadores y
+                      a. El juego no tiene winner %>
                 <% if @newGame.last != nil && @newGame.last.winner_id == nil %>
-                  <%= link_to edit_game_path(@newGame.last) do  %>
-                    <i class="fa-solid fa-table-tennis-paddle-ball"></i>
-                  <% end %>
+                    <%# II. Si vos no lo iniciaste --> te lleva al edit %>
+                    <% if User.find(@newGame.last.player1_id) != current_user %>
+                      <%= link_to edit_game_path(@newGame.last) do  %>
+                        <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                      <% end %>
+                    <%# Show Juego %>
+                    <%# II. Si vos lo iniciaste --> te lleva al show %>
+                    <% else %>
+                      <%= link_to game_path(@newGame.last) do  %>
+                        <i class="fa-solid fa-dice"></i>
+                      <% end %>
+                    <% end %>
                 <% end %>
-
-                <%# Show Juego %>
-                <% if @newGame.last != nil && @newGame.last.winner_id == nil && @newGame.last.player1_id == current_user.id %>
-                  <%= link_to game_path(@newGame.last) do  %>
-                    <i class="fa-solid fa-dice"></i>
-                  <% end %>
-                <% end   %>
 
               </div>
             </div>
@@ -134,5 +141,3 @@
     </div>
   <% end %>
 </div>
-
-<% console %>
