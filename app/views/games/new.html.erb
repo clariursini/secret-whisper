@@ -1,35 +1,36 @@
 <div class="container mt-3">
+  <% opponent = User.find(params[:player2_id]) %>
 
-  <%# if @game.player1_id == current_user.id %>
-    <% opponent = User.find(params[:player2_id]) %>
+  <div class="container d-flex align-items-center">
 
-    <div class="container d-flex align-items-center">
+    <% if opponent.photo.key != nil %>
+      <%= cl_image_tag opponent.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
+    <% else %>
+      <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
+    <% end %>
 
-      <% if opponent.photo.key != nil %>
-        <%= cl_image_tag opponent.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
-      <% else %>
-        <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
-      <% end %>
+    <h1 style="margin-top:20px;"><%= opponent.name %> <small><small><em>is your opponent, now it's your turn</em></small></small></h1>
 
-      <h1 style="margin:0"><%= opponent.name %></h1>
+  </div>
 
+  <div class="container mt-3">
+    <div class="messages text-center">
+      <p style="margin-bottom: 2rem;">Choose your hand</p>
+        <%= simple_form_for @game do |f| %>
+          <%= hidden_field_tag(:player1_id, current_user.id) %>
+          <%= hidden_field_tag(:player2_id, opponent.id) %>
+          <div class="field">
+          <%#= f.input :hand1, as: :radio_buttons, collection: ["Rock", "Paper", "Scissors"] %>
+          <%#= f.input :hand1, as: :select, collection: ["Rock", "Paper", "Scissors"] %>
+            <%= f.collection_radio_buttons(:hand1, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand1| %>
+              <%= hand1.label { image_tag("#{hand1.text}.png") + hand1.radio_button  } %>
+            <% end %>
+          </div>
+          <div>
+            <%= f.button :submit, class: "btn btn-primary" %>
+          </div>
+        <% end %>
     </div>
-
-    <div class="container mt-3">
-      <div class="messages">
-        <p>Choose your hand</p>
-          <%= simple_form_for @game do |f| %>
-            <%= hidden_field_tag(:player1_id, current_user.id) %>
-            <%= hidden_field_tag(:player2_id, opponent.id) %>
-            <div class="field">
-            <%#= f.input :hand1, as: :radio_buttons, collection: ["Rock", "Paper", "Scissors"] %>
-            <%= f.input :hand1, as: :select, collection: ["Rock", "Paper", "Scissors"] %>
-            </div>
-            <div>
-              <%= f.button :submit, class: "btn btn-primary" %>
-            </div>
-          <% end %>
-      </div>
-    </div>
+  </div>
 
 </div>

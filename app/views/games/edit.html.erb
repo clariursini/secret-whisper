@@ -1,6 +1,5 @@
 <div class="container mt-3">
     <% if @game.winner_id == nil %>
-      <h3>Hand 2</h1>
 
       <% if User.find(@game.player1_id) == current_user %>
         <% opponent = User.find(@game.player2_id) %>
@@ -8,7 +7,7 @@
         <% opponent = User.find(@game.player1_id) %>
       <% end %>
 
-      <div class="container d-flex align-items-center">
+      <div class="container d-flex align-items-center" style="margin-bottom: 30px; margin-top: 30px;">
 
         <% if opponent.photo.key != nil %>
           <%= cl_image_tag opponent.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
@@ -16,16 +15,19 @@
           <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
         <% end %>
 
-        <h1 style="margin:0"><%= opponent.name %></h1>
+        <h1 style="margin-top:20px;"><%= opponent.name %> <small><small><em>already played, now it's your turn</em></small></small></h1>
 
       </div>
-
       <div class="container mt-3">
-        <div class="messages">
-          <p>Choose your hand</p>
+        <div class="messages text-center">
+          <p style="margin-bottom: 2rem;">Choose your hand</p>
             <%= simple_form_for @game do |f| %>
               <div class="field">
-              <%= f.input :hand2, as: :select, collection: ["Rock", "Paper", "Scissors"] %>
+                <%#= f.input :hand2, as: :select, collection: ["Rock", "Paper", "Scissors"] %>
+                <%#= f.input :hand2, as: :radio_buttons, collection: ["Rock", "Paper", "Scissors"] %>
+                <%= f.collection_radio_buttons(:hand2, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand2| %>
+                  <%= hand2.label { image_tag("#{hand2.text}.png") + hand2.radio_button  } %>
+                <% end %>
               </div>
               <div>
                 <%= f.button :submit, class: "btn btn-primary" %>
