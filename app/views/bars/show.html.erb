@@ -9,6 +9,7 @@
         <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xxl" %>
       <% end %>
     <% end %>
+
     <div class="notification-content">
       <%= link_to edit_user_registration_path do %>
         <p><strong><%= current_user.name %></strong></p>
@@ -26,7 +27,7 @@
         <% end %>
       </div>
 
-      <%= link_to "#" do  %>
+      <%= link_to games_path do  %>
         <i class="fa-sharp fa-solid fa-gamepad" style="margin-left: 0;"></i>
       <% end %>
 
@@ -75,12 +76,6 @@
                     <% end %>
                   </div>
 
-                  <%# <div data-controller="beer-delete"> %>
-                    <%#= link_to beer_path(@beerTarget), data: {turbo_method: :delete} do %>
-                      <%# <i class="fa-solid fa-champagne-glasses" style="padding:0;" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i> %>
-                    <%#end %>
-                  <%# </div> %>
-
                 <% else %>
                   <div data-controller="beer-icon">
                     <%= simple_form_for @beer do |f| %>
@@ -93,9 +88,45 @@
                   </div>
                 <% end %>
 
-                <%= link_to "#" do  %>
-                  <i class="fa-sharp fa-solid fa-gamepad" ></i>
+                <%# JUEGO
+                1. Chquear si hay un juego entre esos dos jugadores
+                  a. No hay --> te lleva al new (Done)
+                  b. Hay un juego:
+                2. Chequear si el juego tiene winner (si esta abierto o no)
+                  a. Si no tiene winner
+                      I. Si vos lo iniciaste --> te lleva al show
+                      II. Si vos no lo iniciaste --> te lleva al edit
+                  b. Si tiene winner --> te lleva al new (Done) %>
+
+                <%# Juego Nuevo %>
+                <%# 1. Si no hay un juego entre esos dos jugadores --> te lleva al new
+                    2. Si hay un juego entre dos jugadores y
+                       b. El juego tiene winner --> te lleva al new %>
+                <% @newGame = Game.between(current_user, user) %>
+                <% if @newGame == [] || @newGame.last.winner_id != nil %>
+                  <%= link_to new_game_path(player1_id: current_user.id, player2_id: user.id) do  %>
+                    <i class="fa-sharp fa-solid fa-gamepad" ></i>
+                  <% end %>
                 <% end %>
+
+                <%# Edit Juego %>
+                <%# 2. Si hay un juego entre dos jugadores y
+                      a. El juego no tiene winner %>
+                <% if @newGame.last != nil && @newGame.last.winner_id == nil %>
+                    <%# II. Si vos no lo iniciaste --> te lleva al edit %>
+                    <% if User.find(@newGame.last.player1_id) != current_user %>
+                      <%= link_to edit_game_path(@newGame.last) do  %>
+                        <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                      <% end %>
+                    <%# Show Juego %>
+                    <%# II. Si vos lo iniciaste --> te lleva al show %>
+                    <% else %>
+                      <%= link_to game_path(@newGame.last) do  %>
+                        <i class="fa-solid fa-dice"></i>
+                      <% end %>
+                    <% end %>
+                <% end %>
+
               </div>
             </div>
 

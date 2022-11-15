@@ -28,6 +28,7 @@ class BarsController < ApplicationController
     @conversation = Conversation.new
     @beer = Beer.new
     @beers = Beer.all
+    @game = Game.new
   end
 
   def barcode
