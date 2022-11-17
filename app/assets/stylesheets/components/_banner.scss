@@ -18,14 +18,14 @@
 }
 
 .banner p {
-  font-size: 17px;
+  font-size: 15px;
   color: white;
   opacity: .7;
   text-shadow: 1px 1px 3px rgba(0,0,0,0.2);
 }
 
 .banner a {
-  width: 250px;
+  width: 130px;
 }
 
 .banner img {
@@ -33,4 +33,8 @@
   margin: 0 auto;
   // margin-top: 15px;
   margin-bottom: 15px;
+}
+
+.container {
+  background-color: black;
 }
