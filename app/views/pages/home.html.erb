@@ -1,18 +1,12 @@
 <div class="banner text-center d-flex align-items-center" style="background-color: black; height: 100vh;">
-  <div class="container d-flex flex-column p-4">
+  <div class="mt-5 container d-flex flex-column p-4">
     <%= image_tag("breakit-crop") %>
     <h1 class="mb-3">The ultimate ice breaker</h1>
-    <p class="mb-5">Interact with people around you</p>
-    <div class="container d-flex flex-column pl-5 pr-5" style="align-items: center;">
-      <%= link_to 'Login', new_user_session_path, class: "btn btn-primary mb-3" %>
-      <%= link_to 'Sing Up', new_user_registration_path, class: "btn btn-primary mb-3" %>
-      <%= link_to 'Sing Up with Google', new_user_registration_path, class: "btn btn-primary mb-3" %>
+    <p class="mb-5">Mix the courage of the virtuality with the spontaneity of the reality</p>
+    <div class="container d-flex pl-5 pr-5 mb-5" style="align-items: center; justify-content: space-around;">
+      <%= link_to 'Login', new_user_session_path, class: "white-round-filled-btn" %>
+      <%= link_to 'Sing Up', new_user_registration_path, class: "white-outlined-btn" %>
     </div>
 
   </div>
-</div>
-
-<div class="text-center d-flex flex-column align-items-center justify-content-center p-5" >
-  <h2 class="mb-4">Break It</h2>
-  <p style="color: black;">Lorem, ipsum dolor sit amet consectetur adipisicing elit. Ullam unde incidunt optio porro libero eligendi ab officia illum esse? Nisi vero soluta doloribus neque doloremque iusto mollitia sequi, minus nulla!</p>
 </div>
