@@ -2,6 +2,8 @@
   margin: 6vw auto;
   margin-top: 6vw;
   margin-bottom: 6vw;
+  padding-right: 20px;
+  padding-left: 20px;
 }
 
 .registration-form .form-control {
@@ -14,4 +16,12 @@
 
 .registration-form .form-select {
   background-color: white;
+}
+
+label  {
+  color: white;
+}
+
+.form-control, .form-select {
+  border-radius: 10px;
 }
