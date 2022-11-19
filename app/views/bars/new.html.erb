@@ -1,10 +1,14 @@
 <div class="container mt-4">
   <h3>Create a new bar</h1>
-  <div class="container mt-4 p-4" style= "background: white;">
+  <div class="container mt-4">
     <%= simple_form_for @barsito do |f| %>
       <%= f.input :name %>
-      <%= f.button :submit, class: "btn btn-primary" %>
+      <div class="d-flex justify-content-center">
+        <%= f.button :submit, class: "white-round-filled-btn mt-2" %>
+      </div>
     <% end %>
   </div>
-  <%= link_to "Back", bars_path, class: "btn btn-primary mt-4" %>
+  <div class="d-flex justify-content-center">
+    <%= link_to "Back", bars_path, class: "white-round-filled-btn mt-5" %>
+  </div>
 </div>
