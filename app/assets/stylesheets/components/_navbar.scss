@@ -1,6 +1,6 @@
 .navbar-lewagon {
   justify-content: space-between;
-  background: white;
+  background: black;
 }
 
 .navbar-lewagon .navbar-collapse {
@@ -14,4 +14,21 @@
 
 .nav-link {
   margin-bottom: 0;
+}
+
+.navbar-toggler {
+  background-color: white;
+}
+
+.navbar a, .navbar h1 {
+  color: white;
+}
+
+.navbar a:hover {
+  color: rgb(139, 139, 139);
+}
+
+
+.dropdown-menu a {
+  color: black;
 }
