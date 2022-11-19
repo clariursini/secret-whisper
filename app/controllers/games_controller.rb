@@ -41,38 +41,41 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @game.update(game_params)
 
-    @game.winner_id = compareHand
-    @game.draw = compareHand
-    @game.save!
+    if @game.hand1 == "Paper" && @game.hand2 == "Rock"
+      @game.winner_id = @game.player1_id
+      @game.save!
+    elsif @game.hand1 == "Paper" && @game.hand2 == "Scissors"
+      @game.winner_id = @game.player2_id
+      @game.save!
+    elsif @game.hand1 == "Paper" && @game.hand2 == "Paper"
+      @game.winner_id = @game.player1_id
+      @game.draw = "Draw"
+      @game.save!
 
+    elsif @game.hand1 == "Rock" && @game.hand2 == "Paper"
+      @game.winner_id = @game.player2_id
+      @game.save!
+    elsif @game.hand1 == "Rock" && @game.hand2 == "Scissors"
+      @game.winner_id = @game.player1_id
+      @game.save!
+    elsif @game.hand1 == "Rock" && @game.hand2 == "Rock"
+      @game.winner_id = @game.player1_id
+      @game.draw = "Draw"
+      @game.save!
+
+    elsif @game.hand1 == "Scissors" && @game.hand2 == "Paper"
+      @game.winner_id = @game.player1_id
+      @game.save!
+    elsif @game.hand1 == "Scissors" && @game.hand2 == "Rock"
+      @game.winner_id = @game.player2_id
+      @game.save!
+    elsif @game.hand1 == "Scissors" && @game.hand2 == "Scissors"
+      @game.winner_id = @game.player1_id
+      @game.draw = "Draw"
+      @game.save!
+    end
 
     redirect_to game_path(@game)
-
-  end
-
-  def compareHand(hand1, hand2)
-
-    if hand1 == "Paper" && hand2 == "Rock"
-      1
-    elsif hand1 == "Paper" && hand2 == "Scissors"
-      2
-    elsif hand1 == "Paper" && hand2 == "Paper"
-      3
-
-    elsif hand1 == "Rock" && hand2 == "Paper"
-      2
-    elsif hand1 == "Rock" && hand2 == "Scissors"
-      1
-    elsif hand1 == "Rock" && hand2 == "Rock"
-      3
-
-    elsif hand1 == "Scissors" && hand2 == "Paper"
-      1
-    elsif hand1 == "Scissors" && hand2 == "Rock"
-      2
-    elsif hand1 == "Scissors" && hand2 == "Scissors"
-      3
-    end
 
   end
 
