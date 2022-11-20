@@ -41,47 +41,71 @@ class GamesController < ApplicationController
     @game = Game.find(params[:id])
     @game.update(game_params)
 
-    if @game.hand1 == "Paper" && @game.hand2 == "Rock"
-      @game.winner_id = @game.player1_id
-      @game.save!
-    elsif @game.hand1 == "Paper" && @game.hand2 == "Scissors"
-      @game.winner_id = @game.player2_id
-      @game.save!
-    elsif @game.hand1 == "Paper" && @game.hand2 == "Paper"
-      @game.winner_id = @game.player1_id
-      @game.draw = "Draw"
-      @game.save!
-
-    elsif @game.hand1 == "Rock" && @game.hand2 == "Paper"
-      @game.winner_id = @game.player2_id
-      @game.save!
-    elsif @game.hand1 == "Rock" && @game.hand2 == "Scissors"
-      @game.winner_id = @game.player1_id
-      @game.save!
-    elsif @game.hand1 == "Rock" && @game.hand2 == "Rock"
-      @game.winner_id = @game.player1_id
-      @game.draw = "Draw"
-      @game.save!
-
-    elsif @game.hand1 == "Scissors" && @game.hand2 == "Paper"
-      @game.winner_id = @game.player1_id
-      @game.save!
-    elsif @game.hand1 == "Scissors" && @game.hand2 == "Rock"
-      @game.winner_id = @game.player2_id
-      @game.save!
-    elsif @game.hand1 == "Scissors" && @game.hand2 == "Scissors"
-      @game.winner_id = @game.player1_id
-      @game.draw = "Draw"
-      @game.save!
-    end
+    winner
+    @game.save!
 
     redirect_to game_path(@game)
 
   end
 
+  def compareHand(handA, handB)
+
+    if handA == "Paper" && handB == "Rock"
+      1
+    elsif handA == "Paper" && handB == "Scissors"
+      2
+    elsif handA == "Paper" && handB == "Paper"
+      3
+
+    elsif handA == "Rock" && handB == "Paper"
+      2
+    elsif handA == "Rock" && handB == "Scissors"
+      1
+    elsif handA == "Rock" && handB == "Rock"
+      3
+
+    elsif handA == "Scissors" && handB == "Paper"
+      1
+    elsif handA == "Scissors" && handB == "Rock"
+      2
+    elsif handA == "Scissors" && handB == "Scissors"
+      3
+    end
+
+  end
+
+  def winner
+    raise
+    hand1 = @game.hand1
+    hand2 = params[:hand2]
+    hand3 = @game.hand3
+    hand4 = params[:hand4]
+    hand5 = @game.hand5
+    hand6 = params[:hand6]
+
+    a = [
+      compareHand(hand1, hand2),
+      compareHand(hand3, hand4),
+      compareHand(hand5, hand6)
+    ]
+
+    if a.count(1) > a.count(2) && a.count(1) > a.count(3) # gana el 1
+      @game.winner_id = @game.player1_id
+    elsif a.count(2) > a.count(1) && a.count(2) > a.count(3) # gana el 2
+      @game.winner_id = @game.player2_id
+    elsif a.count(1) == a.count(2) && a.count(3) == 1 #empate
+      @game.winner_id = @game.player1_id
+      @game.draw = "Draw"
+    elsif a.count(3) == 3 #empate
+      @game.winner_id = @game.player1_id
+      @game.draw = "Draw"
+    end
+  end
+
+
   private
 
   def game_params
-    params.require(:game).permit(:hand1, :hand2)
+    params.require(:game).permit(:hand1, :hand2, :hand3, :hand4, :hand5, :hand6)
   end
 end
