@@ -38,7 +38,6 @@ class GamesController < ApplicationController
     winner
     @game.save!
     redirect_to game_path(@game)
-
   end
 
   def compareHand(handA, handB)
@@ -46,12 +45,10 @@ class GamesController < ApplicationController
       1
     elsif handA == "Paper" && handB == "Scissors"
       2
-
     elsif handA == "Rock" && handB == "Paper"
       2
     elsif handA == "Rock" && handB == "Scissors"
       1
-
     elsif handA == "Scissors" && handB == "Paper"
       1
     elsif handA == "Scissors" && handB == "Rock"
@@ -59,7 +56,6 @@ class GamesController < ApplicationController
     elsif handA == handB
       3
     end
-
   end
 
   def winner
