@@ -45,37 +45,27 @@ class GamesController < ApplicationController
     @game.save!
 
     redirect_to game_path(@game)
-
   end
 
   def compareHand(handA, handB)
-
     if handA == "Paper" && handB == "Rock"
       1
     elsif handA == "Paper" && handB == "Scissors"
       2
-    elsif handA == "Paper" && handB == "Paper"
-      3
-
     elsif handA == "Rock" && handB == "Paper"
       2
     elsif handA == "Rock" && handB == "Scissors"
       1
-    elsif handA == "Rock" && handB == "Rock"
-      3
-
     elsif handA == "Scissors" && handB == "Paper"
       1
     elsif handA == "Scissors" && handB == "Rock"
       2
-    elsif handA == "Scissors" && handB == "Scissors"
+    elsif handA == handB
       3
     end
-
   end
 
   def winner
-    raise
     hand1 = @game.hand1
     hand2 = params[:hand2]
     hand3 = @game.hand3
@@ -93,15 +83,11 @@ class GamesController < ApplicationController
       @game.winner_id = @game.player1_id
     elsif a.count(2) > a.count(1) && a.count(2) > a.count(3) # gana el 2
       @game.winner_id = @game.player2_id
-    elsif a.count(1) == a.count(2) && a.count(3) == 1 #empate
-      @game.winner_id = @game.player1_id
-      @game.draw = "Draw"
-    elsif a.count(3) == 3 #empate
+    elsif a.count(1) == a.count(2) || a.count(3) == 3 # empate
       @game.winner_id = @game.player1_id
       @game.draw = "Draw"
     end
   end
-
 
   private
 

@@ -26,6 +26,16 @@
               <%= hand1.label { image_tag("#{hand1.text}.png") + hand1.radio_button  } %>
             <% end %>
           </div>
+          <div class="field">
+            <%= f.collection_radio_buttons(:hand3, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand3| %>
+              <%= hand3.label { image_tag("#{hand3.text}.png") + hand3.radio_button  } %>
+            <% end %>
+          </div>
+          <div class="field">
+            <%= f.collection_radio_buttons(:hand5, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand5| %>
+              <%= hand5.label { image_tag("#{hand5.text}.png") + hand5.radio_button  } %>
+            <% end %>
+          </div>
           <div>
             <%= f.button :submit, class: "btn btn-primary" %>
           </div>
