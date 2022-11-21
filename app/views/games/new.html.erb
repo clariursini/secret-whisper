@@ -20,10 +20,18 @@
           <%= hidden_field_tag(:player1_id, current_user.id) %>
           <%= hidden_field_tag(:player2_id, opponent.id) %>
           <div class="field">
-          <%#= f.input :hand1, as: :radio_buttons, collection: ["Rock", "Paper", "Scissors"] %>
-          <%#= f.input :hand1, as: :select, collection: ["Rock", "Paper", "Scissors"] %>
             <%= f.collection_radio_buttons(:hand1, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand1| %>
               <%= hand1.label { image_tag("#{hand1.text}.png") + hand1.radio_button  } %>
+            <% end %>
+          </div>
+          <div class="field">
+            <%= f.collection_radio_buttons(:hand3, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand3| %>
+              <%= hand3.label { image_tag("#{hand3.text}.png") + hand3.radio_button  } %>
+            <% end %>
+          </div>
+          <div class="field">
+            <%= f.collection_radio_buttons(:hand5, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand5| %>
+              <%= hand5.label { image_tag("#{hand5.text}.png") + hand5.radio_button  } %>
             <% end %>
           </div>
           <div>
