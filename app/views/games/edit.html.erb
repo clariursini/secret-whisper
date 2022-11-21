@@ -23,12 +23,21 @@
           <p style="margin-bottom: 2rem;">Choose your hand</p>
             <%= simple_form_for @game do |f| %>
               <div class="field">
-                <%#= f.input :hand2, as: :select, collection: ["Rock", "Paper", "Scissors"] %>
-                <%#= f.input :hand2, as: :radio_buttons, collection: ["Rock", "Paper", "Scissors"] %>
                 <%= f.collection_radio_buttons(:hand2, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand2| %>
                   <%= hand2.label { image_tag("#{hand2.text}.png") + hand2.radio_button  } %>
                 <% end %>
               </div>
+              <div class="field">
+                <%= f.collection_radio_buttons(:hand4, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand4| %>
+                  <%= hand4.label { image_tag("#{hand4.text}.png") + hand4.radio_button  } %>
+                <% end %>
+              </div>
+              <div class="field">
+                <%= f.collection_radio_buttons(:hand6, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand6| %>
+                  <%= hand6.label { image_tag("#{hand6.text}.png") + hand6.radio_button  } %>
+                <% end %>
+              </div>
+
               <div>
                 <%= f.button :submit, class: "btn btn-primary" %>
               </div>
@@ -38,7 +47,7 @@
 
     <% else %>
       <div class="container d-flex align-items-center">
-        <p>Play has ended, please start a new game</p>
+        <p style="color:white;">Play has ended, please start a new game</p>
       </div>
 
     <% end %>
