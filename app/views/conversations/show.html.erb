@@ -37,16 +37,22 @@
     </div>
   </div>
 
-  <div class="container mt-3">
+  <div class="container mt-3" id="scroll-chat">
     <%= simple_form_for [@conversation, @message], html: { data: { action: "turbo:submit-end->chat-broadcast#resetForm" }} do |f| %>
     <div class="field">
       <%= f.text_area :body, class: "form-control", style: "background: white; margin-bottom: 15px;" %>
     </div>
     <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
     <div>
-      <%= f.submit "Send", class: "btn btn-primary" %>
+      <%= f.submit "Send", class: "btn btn-primary"%>
     </div>
     <% end %>
   </div>
 
 </div>
+
+<script>
+  if (document.getElementById("scroll-chat")) {
+    window.scrollTo(0, document.body.scrollHeight);
+  }
+</script>

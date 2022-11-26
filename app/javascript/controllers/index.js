@@ -16,5 +16,8 @@ application.register("chat-broadcast", ChatBroadcastController)
 import HelloController from "./hello_controller"
 application.register("hello", HelloController)
 
+import MessageScrollController from "./message_scroll_controller"
+application.register("message-scroll", MessageScrollController)
+
 import ResetFormController from "./reset_form_controller"
 application.register("reset-form", ResetFormController)
