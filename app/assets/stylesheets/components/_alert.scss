@@ -4,3 +4,14 @@
   right: 16px;
   z-index: 1000;
 }
+
+.alert2 {
+  color: white;
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  z-index: 1000;
+  width: 500px;
+  height: 500px;
+  background-color: red;
+}

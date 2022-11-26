@@ -17,4 +17,6 @@ Rails.application.routes.draw do
   get 'profile', to: 'friends#show', as: 'profile'
   # get 'bar', to: 'bar#show', as: 'bar'
   get 'barcode/:id', to: 'bars#barcode', as: 'barcode'
+  get 'new_post', to: 'pages#new_post', as: 'new_post'
+  put 'update_post', to: 'pages#update_post', as: 'update_post'
 end

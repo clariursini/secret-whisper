@@ -12,7 +12,7 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(*)
-    edit_user_registration_path
+    new_post_path
   end
 
   def user_root_path
