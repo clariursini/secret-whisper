@@ -1,0 +1,21 @@
+<h1>New post</h1>
+<div class="hiddden" id="hidden-div"></div>
+<div>
+  <%= simple_form_for(@user, url: update_post_path(@user),html: { method: :put }) do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :photo, as: :file, required: true, label: "Upload your profile picture" %>
+      <%= f.input :description,
+                  required: true,
+                  label: "About me",
+                  input_html: { autocomplete: "about-me" } %>
+    </div>
+
+    <div class="d-flex">
+      <div class="form-actions">
+        <%= f.button :submit, "Save Changes", class: "btn btn-primary", style: "margin-right: 10px;" %>
+      </div>
+    </div>
+  <% end %>
+</div>
