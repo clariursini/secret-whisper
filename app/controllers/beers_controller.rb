@@ -1,6 +1,10 @@
 class BeersController < ApplicationController
   def index
     @beers = Beer.where(recipient_id: current_user).order(created_at: :desc)
+    @beers.each do |beer|
+      beer.read = true
+      beer.save!
+    end
     @beer = Beer.new
   end
 
