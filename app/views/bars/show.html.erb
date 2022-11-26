@@ -22,8 +22,14 @@
           <i class="fa-sharp fa-solid fa-comment-dots" style="margin-left: 0;"></i>
         <% end %>
 
-        <%= link_to beers_path do  %>
-          <i class="fa-solid fa-beer-mug-empty"></i>
+        <% if @beers.where(recipient_id: current_user, read: false) == [] %>
+          <%= link_to beers_path do  %>
+            <i class="fa-solid fa-beer-mug-empty"></i>
+          <% end %>
+        <% else %>
+          <%= link_to beers_path do  %>
+            <i class="fa-solid fa-beer-mug-empty" style="color: red; margin-left: 0;"></i>
+          <% end %>
         <% end %>
       </div>
 
