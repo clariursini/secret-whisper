@@ -1,5 +1,5 @@
 <div class="container mt-4">
-  <h1><%= @bar.name %></h1>
+  <h1 id="bar-name" onpageshow="reloadFunction()"><%= @bar.name %></h1>
 
   <div class="notification user-card">
     <%= link_to edit_user_registration_path do %>
@@ -70,27 +70,27 @@
                 <% end %>
 
                 <% @beerTarget = @beers.where(sender_id: current_user.id, recipient_id: user.id).first  %>
-
                 <% if @beerTarget.present? %>
-                  <div data-controller="beer-delete">
-                    <%= simple_form_for @beerTarget, url: beer_path(@beerTarget), method: :delete do |f| %>
-                      <%= hidden_field_tag(:sender_id, current_user.id) %>
-                      <%= hidden_field_tag(:recipient_id, user.id) %>
-                      <%= f.button :button, style: "padding:0;" do %>
-                        <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i>
-                      <% end %>
-                    <% end %>
+                  <div class="delete-beer-div">
+                    <button class="delete-beer" data-target-id=<%= @beerTarget.present? ? @beerTarget.id : ""%>>
+                      <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i>
+                    </button>
                   </div>
-
+                  <div class="create-beer-div d-none">
+                    <button class="create-beer" data-sender-id="<%= current_user.id %>" data-recipient-id="<%= user.id %>">
+                      <i class="fa-solid fa-beer-mug-empty" data-beer-icon-target="beer" data-action="click->beer-icon#addBeer">
+                    </i></button>
+                  </div>
                 <% else %>
-                  <div data-controller="beer-icon">
-                    <%= simple_form_for @beer do |f| %>
-                      <%= hidden_field_tag(:sender_id, current_user.id) %>
-                      <%= hidden_field_tag(:recipient_id, user.id) %>
-                      <%= f.button :button, style: "padding:0;" do %>
-                        <i class="fa-solid fa-beer-mug-empty" data-beer-icon-target="beer" data-action="click->beer-icon#addBeer"></i>
-                      <% end %>
-                    <% end %>
+                  <div class="delete-beer-div d-none">
+                    <button class="delete-beer" data-target-id="">
+                      <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i>
+                    </button>
+                  </div>
+                  <div class="create-beer-div">
+                    <button class="create-beer" data-sender-id="<%= current_user.id %>" data-recipient-id="<%= user.id %>">
+                      <i class="fa-solid fa-beer-mug-empty" data-beer-icon-target="beer" data-action="click->beer-icon#addBeer">
+                    </i></button>
                   </div>
                 <% end %>
 
@@ -139,13 +139,13 @@
         <% end %>
       <% end %>
     </div>
-    <button id="change-barcode">Cambiar barcode</button>
+
   <% else %>
     <div class="list">
       <div class="notification d-flex justify-content-center align-items-center text-center", style= "height: 20vh;">
         <strong><p>Please scan a QR code in your bar to conect with other people</p></strong>
-        <button id="change-barcode">Cambiar barcode</button>
       </div>
     </div>
   <% end %>
 </div>
+
