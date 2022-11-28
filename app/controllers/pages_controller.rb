@@ -10,12 +10,12 @@ class PagesController < ApplicationController
 
   def update_post
     @user = User.find(current_user.id)
-    if params[:photo] == nil
+    if params[:user][:photo] == nil
       puts "NO HAY FOTO"
       flash.notice = "SUBI UNA FOTO LOCO"
       render :new_post, status: :unprocessable_entity
     else
-      if @user.update(post_params)
+      if @user.update!(post_params)
         redirect_to bar_path(current_user.bar_code)
       else
         render :new_post, status: :unprocessable_entity
