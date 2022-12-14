@@ -7,3 +7,47 @@
   border: none;
   background: none;
 }
+
+.friend-photo {
+  height: 300px;
+  align-items: flex-end;
+  justify-content: space-between;
+}
+
+.friend-about{
+  margin-left: 15px;
+  margin-top: 10px;
+}
+
+.friend-about p {
+  color: white;
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
+}
+
+.friend {
+  margin-bottom: 30px;
+}
+
+.friend-name a {
+  text-decoration: none;
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 28px;
+  color: #FFFFFF;
+  margin-left: 15px;
+}
+
+.notification-actions svg {
+  margin: 10px;
+}
+
+.notification-actions {
+  margin-right: 10px;
+}
