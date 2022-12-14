@@ -32,3 +32,28 @@
 .dropdown-menu a {
   color: black;
 }
+
+// NAVBAR MAIN //
+
+.navbar h1 {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 22px;
+  line-height: 28px;
+  display: flex;
+  align-items: center;
+  color: #FFFFFF;
+  margin-bottom: 0;
+  margin-left: 20px;
+}
+
+.navbar-lewagon .navbar-photo img {
+  width: 39px;
+  height: 36px;
+  border-radius: 50%;
+}
+
+.navbar-icons a {
+  margin: 10px;
+}
