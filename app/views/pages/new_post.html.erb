@@ -1,21 +1,96 @@
-<h1>New post</h1>
-<div class="hiddden" id="hidden-div"></div>
-<div>
-  <%= simple_form_for(@user, url: update_post_path(@user),html: { method: :put }) do |f| %>
-    <%= f.error_notification %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
 
-    <div class="form-inputs">
-      <%= f.input :photo, as: :file, required: true, label: "Upload your profile picture" %>
-      <%= f.input :description,
-                  required: true,
-                  label: "About me",
-                  input_html: { autocomplete: "about-me" } %>
-    </div>
-
-    <div class="d-flex">
-      <div class="form-actions">
-        <%= f.button :submit, "Save Changes", class: "btn btn-primary", style: "margin-right: 10px;" %>
+      <div class="col-1 d-flex justify-content-center">
+        <%= link_to root_path, class: "navbar-brand" do %>
+          <svg style = "margin-left: 20px;" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 2L2 9L9 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        <% end %>
       </div>
-    </div>
-  <% end %>
+
+      <div class="col-11 p-2 d-flex justify-content-start" style="margin-left: -5px;">
+        <%= image_tag("breakit-small", class:"navbar-logo")%>
+        <h1 style="margin-left: 5px;">BREAKIT</h1>
+      </div>
 </div>
+
+<div class="hiddden" id="hidden-div"></div>
+
+<% if @user.photo.key != nil %>
+
+  <%= cl_image_tag current_user.photo.key, id:"first-photo" %>
+  <img class= "user-photo d-none" id="user-photo">
+
+  <div>
+    <%= simple_form_for(@user, url: update_post_path(@user),html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :photo, input_html: { class: 'd-none'}, label: false %>
+      <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: image_tag('upload-photo.png')  %>
+  </div>
+
+      <%= f.input :description,
+      required: true,
+      label: false,
+      input_html: { autocomplete: "about-me" },
+      placeholder: "Add a post" %>
+
+        <div class="d-flex justify-content-center">
+        <div class="form-actions">
+          <%= f.button :submit, "Post", class: "white-round-filled-btn", style: "padding-right: 10px; padding-left: 10px; width: 103px; height: 41px; margin-top: 50px;" %>
+        </div>
+      </div>
+    <% end %>
+
+<% else %>
+
+  <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", id:"first-photo" %>
+  <img class= "user-photo d-none" id="user-photo">
+
+  <div>
+    <%= simple_form_for(@user, url: update_post_path(@user),html: { method: :put }) do |f| %>
+      <%= f.error_notification %>
+      <%= f.input :photo, input_html: { class: 'd-none'}, label: false %>
+      <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: image_tag('upload-photo.png')  %>
+  </div>
+
+      <%= f.input :description,
+      required: true,
+      label: false,
+      input_html: { autocomplete: "about-me" },
+      placeholder: "Add a post" %>
+
+        <div class="d-flex justify-content-center">
+        <div class="form-actions">
+          <%= f.button :submit, "Post", class: "white-round-filled-btn", style: "padding-right: 10px; padding-left: 10px; width: 103px; height: 41px; margin-top: 50px;" %>
+        </div>
+      </div>
+    <% end %>
+<% end %>
+
+
+<script>
+
+  const previewImageOnFileSelect = () => {
+  // we select the photo input
+  const input = document.getElementById('photo-input');
+    // we add a listener to know when a new picture is uploaded
+    input.addEventListener('change', () => {
+      // we call the displayPreview function (who retrieve the image url and display it)
+      displayPreview(input);
+    })
+}
+
+const displayPreview = (input) => {
+    const reader = new FileReader();
+    reader.onload = (event) => {
+      document.getElementById('user-photo').src = event.currentTarget.result;
+    }
+    reader.readAsDataURL(input.files[0])
+    document.getElementById('user-photo').classList.remove('d-none');
+    document.getElementById('first-photo').classList.add('d-none');
+}
+
+if (window.location.href.includes("new_post")) {
+  previewImageOnFileSelect()
+}
+</script>
