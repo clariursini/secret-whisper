@@ -1,0 +1,41 @@
+.navbar-logo {
+  height: 25px;
+  width: 27px;
+  margin-left: 75px;
+}
+
+.user_description textarea {
+  background-image: none !important;
+  background: rgba(217, 217, 217, 0.5) !important;
+  border-color: #ffffff00 !important;
+  color: #ffffff;
+  border-radius: 15px;
+}
+
+.upload-photo {
+  padding: 16px 24px;
+  cursor: pointer;
+  font-weight: 500;
+  border-radius: 2px;
+}
+
+.user-photo {
+  width: 100%;
+  height: 300px;
+}
+
+#first-photo {
+  width: 100%;
+  height: 300px;
+}
+
+
+.user_description{
+  margin: 20px 10px 30px 10px;
+}
+
+.user_photo {
+  position: fixed;
+  top: 285px;
+  right: 0px;
+}
