@@ -1,30 +1,39 @@
-<div class="container mt-3" data-controller="chat-broadcast"
+<%# ------------------------NAVBAR-------------------- %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="col-1 d-flex justify-content-center">
+    <%= link_to bar_path(current_user.bar_code), class: "navbar-brand" do %>
+      <svg style = "margin-left: 20px;" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 2L2 9L9 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    <% end %>
+  </div>
+  <div class="col-11 d-flex align-items-center">
+      <% if @conversation.recipient_id == current_user.id %>
+        <% if @conversation.sender.photo.key != nil %>
+          <%= cl_image_tag @conversation.sender.photo.key, style:"width:30px; height: 30px; border-radius: 50%;" %>
+        <% else %>
+          <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", style:"width:30px; height: 30px; border-radius: 50%;" %>
+        <% end %>
+        <p style= "margin: 0; font-size: 16px; color: white; margin-left: 10px;"><%= @conversation.sender.name %></p>
+      <% else %>
+        <% if @conversation.recipient.photo.key != nil %>
+          <%= cl_image_tag @conversation.recipient.photo.key, style:"width:30px; height: 30px; border-radius: 50%;" %>
+        <% else %>
+          <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", style:"width:30px; height: 30px; border-radius: 50%;" %>
+        <% end %>
+        <p style= "margin: 0; font-size: 16px; color: white; margin-left: 10px;"><%= @conversation.recipient.name %></p>
+      <% end %>
+  </div>
+</div>
+
+<%# ------------------------MAIN-------------------- %>
+
+<div class="" data-controller="chat-broadcast"
     data-chat-broadcast-conversation-id-value="<%= @conversation.id %>"
     data-chat-broadcast-current-user-id-value="<%= current_user.id %>">
 
-  <div class="container d-flex align-items-center">
-      <% if @conversation.recipient_id == current_user.id %>
-        <% if @conversation.sender.photo.key != nil %>
-          <%= cl_image_tag @conversation.sender.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
-        <% else %>
-          <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
-        <% end %>
-        <h1 style="margin:0"><%= @conversation.sender.name %></h1>
-      <% else %>
-        <% if @conversation.recipient.photo.key != nil %>
-          <%= cl_image_tag @conversation.recipient.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
-        <% else %>
-          <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
-        <% end %>
-        <h1 style="margin:0;"><%= @conversation.recipient.name %></h1>
-      <% end %>
-  </div>
-
-  <div class="container mt-3">
+  <div class="container messages-box" style="overflow-y:auto;">
     <div class="messages" data-chat-broadcast-target="messages">
-      <% if @over_ten %>
-        <%= link_to 'Show Previous', '?m=all' %>
-      <% end %>
       <% @conversation.messages.each do |message| %>
         <% if message.body %>
           <div class="message-row d-flex <%= message.sender?(current_user) ? 'justify-content-end' : 'justify-content-start' %>">
@@ -37,22 +46,32 @@
     </div>
   </div>
 
-  <div class="container mt-3" id="scroll-chat">
+  <div class="container chat-box mt-3" id="scroll-chat">
     <%= simple_form_for [@conversation, @message], html: { data: { action: "turbo:submit-end->chat-broadcast#resetForm" }} do |f| %>
     <div class="field">
       <%= f.text_area :body, class: "form-control", style: "background: white; margin-bottom: 15px;" %>
     </div>
     <%= f.text_field :user_id, value: current_user.id, type: "hidden" %>
-    <div>
-      <%= f.submit "Send", class: "btn btn-primary"%>
-    </div>
+    <%= f.submit "Send", class: "send"%>
     <% end %>
   </div>
 
 </div>
 
 <script>
-  if (document.getElementById("scroll-chat")) {
-    window.scrollTo(0, document.body.scrollHeight);
-  }
+      if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+      else
+        localStorage.removeItem('firstLoad');
+    }
+
+    items = document.querySelectorAll(".message-new");
+    last = items[items.length-1];
+    last.scrollIntoView();
+
 </script>
