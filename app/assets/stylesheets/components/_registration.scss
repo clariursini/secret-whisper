@@ -7,7 +7,10 @@
 }
 
 .registration-form .form-control {
-  background-color: white;
+  background: rgba(217, 217, 217, 0.5) !important;
+  border-color: #ffffff00 !important;
+  color: #ffffff;
+  border-radius: 15px;
 }
 
 // .registration-form .form-check-input {
@@ -15,7 +18,10 @@
 // }
 
 .registration-form .form-select {
-  background-color: white;
+  background: rgba(217, 217, 217, 0.5) !important;
+  border-color: #ffffff00 !important;
+  color: #ffffff;
+  border-radius: 15px;
 }
 
 label  {
@@ -35,4 +41,15 @@ label  {
 
 .form-check-label {
   margin-bottom: 40px;
+}
+
+.edit-profile .user_photo {
+  position: absolute;
+  top: 171px !important;
+  right: 13px !important;
+}
+
+.edit-profile .user_description {
+  margin: 0;
+  margin-bottom: 1rem !important;
 }
