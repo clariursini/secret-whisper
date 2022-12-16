@@ -1,6 +1,20 @@
-<div class="container mt-3">
-  <h3>Games Played</h3>
+<%# ------------------------NAVBAR-------------------- %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="col-1 d-flex justify-content-center">
+    <%= link_to bar_path(current_user.bar_code), class: "navbar-brand" do %>
+      <svg style = "margin-left: 20px;" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 2L2 9L9 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    <% end %>
+  </div>
+  <div class="col-11 d-flex justify-content-center">
+    <p style= "margin: 0; font-size: 16px; color: white; margin-left: -20px;">Games</h1>
+  </div>
+</div>
 
+<%# ------------------------MAIN-------------------- %>
+
+<div class="container mt-3">
   <div class="list">
 
     <% @games.each do |game| %>
@@ -24,8 +38,25 @@
               <% end %>
             <% end %>
 
-            <div class="notification-content">
-              <strong><%= link_to "#{opponent.name} (#{opponent.age})", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
+            <div class="notification-content d-flex flex-column">
+              <strong><%= link_to "#{opponent.name}", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
+              <% if game.winner_id == nil %>
+                <% if game.player2_id == current_user.id %>
+                  <p style="color: #5A81E3; font-size: 15px;">It is your turn</p>
+                <% else %>
+                  <p style="font-size: 15px;">It is <%= User.find(game.player2_id).name %>'s turn</p>
+                <% end %>
+              <% else %>
+                <% if game.draw == nil %>
+                  <% if User.find(game.winner_id) == current_user %>
+                    <p style="font-size: 15px; color: green;">You won!</p>
+                  <% else %>
+                    <p style="font-size: 15px; color: red;">You lost</p>
+                  <% end %>
+                <% else %>
+                  <p style="font-size: 15px;">It is a draw</p>
+                <% end %>
+              <% end %>
             </div>
 
           <% else %>
@@ -39,8 +70,25 @@
                 <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
               <% end %>
             <% end %>
-            <div class="notification-content">
-              <strong><%= link_to "#{opponent.name} (#{opponent.age})", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
+            <div class="notification-content d-flex flex-column">
+              <strong><%= link_to "#{opponent.name}", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
+              <% if game.winner_id == nil %>
+                <% if game.player2_id == current_user.id %>
+                  <p style="color: #5A81E3; font-size: 15px;">It is your turn</p>
+                <% else %>
+                  <p style="font-size: 15px;">It is <%= User.find(game.player2_id).name %>'s turn</p>
+                <% end %>
+              <% else %>
+                <% if game.draw == nil %>
+                  <% if User.find(game.winner_id) == current_user %>
+                    <p style="font-size: 15px; color: green;">You won!</p>
+                  <% else %>
+                    <p style="font-size: 15px; color: red;">You lost</p>
+                  <% end %>
+                <% else %>
+                  <p style="font-size: 15px; color: red;">It is a draw</p>
+                <% end %>
+              <% end %>
             </div>
 
           <% end %>
@@ -49,32 +97,40 @@
 
             <%# IF THE GAME IS FINISHED %>
             <% if game.winner_id != nil %>
-              <% if game.draw == nil %>
-                <p><%= User.find(game.winner_id).name %> won</p>
-              <% else %>
-                <p>It is a draw</p>
-              <% end %>
+              <div class="d-flex flex-column">
+                <%= link_to new_game_path(player1_id: current_user.id, player2_id: opponent.id) do  %>
+                  <p style="font-size: 15px; color: white; text-align: center;">Play again</p>
+                <% end %>
+                <% if game.draw == nil %>
+                  <% if User.find(game.winner_id) == current_user %>
+                    <p style="font-size: 15px; color: white;">1/0</p>
+                  <% else %>
+                    <p style="font-size: 15px; color: white;">0/1</p>
+                  <% end %>
+                <% else %>
+                  <p style="font-size: 15px; color: white;">0/0</p>
+                <% end %>
+              </div>
 
-              <%= link_to game_path(game) do  %>
-                  <i class="fa-solid fa-dice"></i>
-              <% end %>
 
             <%# IF THE GAME IS NOT FINISHED %>
             <% else %>
               <%# if game.hand2 == nil %>
                 <% if game.player2_id == current_user.id %>
-                  <p>It is your turn</p>
                   <%# II. Si vos no lo iniciaste --> te lleva al edit %>
                   <%= link_to edit_game_path(game) do  %>
-                    <i class="fa-solid fa-table-tennis-paddle-ball"></i>
+                    <p class="white-round-filled-btn" style="color: white; width: 70px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Play!</p>
                   <% end %>
                 <% else %>
-                  <p>It is <%= User.find(game.player2_id).name %>'s turn</p>
+                  <div class="d-flex flex-column">
+                    <p style="font-size: 15px; color: white;">Waiting</p>
+                    <p style="font-size: 15px; color: white;">Opponent</p>
+                  </div>
                   <%# Show Juego %>
                   <%# II. Si vos lo iniciaste --> te lleva al show %>
-                  <%= link_to game_path(game) do  %>
-                    <i class="fa-solid fa-dice"></i>
-                  <% end %>
+                  <%#= link_to game_path(game) do  %>
+                    <%# <p class="white-round-filled-btn" style="color: white; width: 70px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Moves</p> %>
+                  <%# end %>
                 <% end %>
               <%# end %>
             <% end %>
@@ -85,3 +141,20 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  // window.onpopstate = function () {
+  //   location.reload()
+  // };
+
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+      else
+        localStorage.removeItem('firstLoad');
+    }
+</script>
