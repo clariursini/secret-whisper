@@ -1,8 +1,21 @@
+<%# ------------------------NAVBAR-------------------- %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="col-1 d-flex justify-content-center">
+    <%= link_to bar_path(current_user.bar_code), class: "navbar-brand" do %>
+      <svg style = "margin-left: 20px;" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 2L2 9L9 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    <% end %>
+  </div>
+  <div class="col-11 d-flex justify-content-center">
+    <p style= "margin: 0; font-size: 16px; color: white; margin-left: -20px;">Beers</h1>
+  </div>
+</div>
+
+<%# ------------------------MAIN-------------------- %>
+
 <div class="container mt-3">
-  <h3>Received Beers</h3>
-
   <div class="list">
-
     <% @beers.each do |beer| %>
       <div class="notification">
         <% if beer.sender.photo.key != nil %>
@@ -10,14 +23,14 @@
               <%= cl_image_tag beer.sender.photo.key, class: "avatar-large" %>
             <% end %>
             <div class="notification-content">
-              <strong><%= link_to "#{beer.sender.name} (#{beer.sender.age})", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
+              <strong><%= link_to "#{beer.sender.name}", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
             </div>
         <% else %>
             <%= link_to profile_path(sender_id: beer.sender.id) do %>
               <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
             <% end %>
             <div class="notification-content">
-              <strong><%= link_to "#{beer.sender.name} (#{beer.sender.age})", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
+              <strong><%= link_to "#{beer.sender.name}", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
             </div>
         <% end %>
 
@@ -28,7 +41,8 @@
               <div data-controller="beer-delete">
                 <%= simple_form_for @target, url: beer_path(@target), method: :delete do |f| %>
                   <%= f.button :button, style: "padding:0;" do %>
-                    <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i>
+                    <%# <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i> %>
+                    <p class="white-round-filled-btn" style="color: black; width: 75px; height: 30px;background: white; font-weight: 600; font-size: 14px; text-align: center;">Conection</p>
                   <% end %>
                 <% end %>
               </div>
@@ -38,7 +52,8 @@
                   <%= hidden_field_tag(:sender_id, current_user.id) %>
                   <%= hidden_field_tag(:recipient_id, beer.sender.id) %>
                   <%= f.button :button, style: "padding:0;" do %>
-                    <i class="fa-solid fa-beer-mug-empty" data-beer-icon-target="beer" data-action="click->beer-icon#addBeer"></i>
+                    <%# <i class="fa-solid fa-beer-mug-empty" data-beer-icon-target="beer" data-action="click->beer-icon#addBeer"></i> %>
+                    <p class="white-round-filled-btn" style="color: white; width: 75px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Return</p>
                   <% end %>
                 <% end %>
               </div>
@@ -48,3 +63,20 @@
     <% end %>
   </div>
 </div>
+
+<script>
+  // window.onpopstate = function () {
+  //   location.reload()
+  // };
+
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+      else
+        localStorage.removeItem('firstLoad');
+    }
+</script>

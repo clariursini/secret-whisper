@@ -2,9 +2,7 @@
   display: flex;
   align-items: center;
   margin-bottom: 8px;
-  background: white;
   padding: 8px 16px;
-  border: 1px solid rgb(235,235,235);
 }
 
 .notification .notification-content {
@@ -14,13 +12,14 @@
 
 .notification-content a{
   text-decoration: none;
-  color: rgb(56, 56, 56);
+  color: white;
 }
 
 .notification p {
   margin: 0;
   line-height: 1.4;
   font-size: 15px;
+  color: white;
 }
 
 .notification small {
@@ -33,7 +32,7 @@
 }
 
 .notification-actions i {
-  color: black;
+  color: white;
   margin-left: 16px;
   font-size: 20px;
 }
@@ -56,5 +55,9 @@
 }
 
 .user-card a {
+  text-decoration: none !important;
+}
+
+.notification-actions a {
   text-decoration: none !important;
 }

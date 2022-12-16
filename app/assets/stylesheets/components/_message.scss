@@ -7,20 +7,31 @@
 .sender-style, .receiver-style {
   width: 70%;
   max-width: 400px;
-  border-radius: 4px;
+  border-radius: 50px;
   padding: 8px;
-  min-height: 80px;
+  min-height: 30px;
+  box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
 }
 
 .sender-style {
-  background-color: lightcoral;
+  background-color: #5A81E3;
 }
 
 .receiver-style {
-  background-color: lightblue;
+  background-color: rgba(217, 217, 217, 0.21);
 }
 
-.messages {
-  padding: 15px;
-  background: white;
+// .messages {
+  // padding: 15px;
+  // background: white;
+// }
+
+.receiver-style p, .sender-style p{
+  margin-bottom: 0rem !important;
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 20px;
+  color: #FFFFFF;
 }
