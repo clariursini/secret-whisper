@@ -1,4 +1,4 @@
-<div class="container mt-3">
+<div class="container mt-3 bg-black">
   <% opponent = User.find(params[:player2_id]) %>
 
   <div class="container d-flex align-items-center">
@@ -14,28 +14,41 @@
   </div>
 
   <div class="container mt-3">
-    <div class="messages text-center">
-      <p style="margin-bottom: 2rem;">Choose your hand</p>
+    <div class="messages text-center bg-black">
+      <p style="margin-bottom: 2rem; color: white">Make 3 moves</p>
         <%= simple_form_for @game do |f| %>
           <%= hidden_field_tag(:player1_id, current_user.id) %>
           <%= hidden_field_tag(:player2_id, opponent.id) %>
           <div class="field">
+            <p style="color: white" class="m-0 p-0 align-self-center ">1º</p>
             <%= f.collection_radio_buttons(:hand1, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand1| %>
-              <%= hand1.label { image_tag("#{hand1.text}.png") + hand1.radio_button  } %>
+              <div class="rounded-circle p-1 hand1">
+              <%= hand1.label {image_tag("#{hand1.text}.png")}  %>
+              </div>
+              <%= hand1.radio_button class:"d-none"%>
             <% end %>
           </div>
+
           <div class="field">
+            <p style="color: white" class="m-0 p-0 align-self-center ">2º</p>
             <%= f.collection_radio_buttons(:hand3, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand3| %>
-              <%= hand3.label { image_tag("#{hand3.text}.png") + hand3.radio_button  } %>
+              <div class="rounded-circle p-1 hand3">
+              <%= hand3.label {image_tag("#{hand3.text}.png")}  %>
+              </div>
+              <%= hand3.radio_button class:"d-none"%>
             <% end %>
           </div>
           <div class="field">
+            <p style="color: white" class="m-0 p-0 align-self-center ">3º</p>
             <%= f.collection_radio_buttons(:hand5, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand5| %>
-              <%= hand5.label { image_tag("#{hand5.text}.png") + hand5.radio_button  } %>
+              <div class="rounded-circle p-1 hand5">
+              <%= hand5.label {image_tag("#{hand5.text}.png")}  %>
+              </div>
+              <%= hand5.radio_button class:"d-none"%>
             <% end %>
           </div>
           <div>
-            <%= f.button :submit, class: "btn btn-primary" %>
+            <%= f.button :submit, "Let's play", class: "btn btn-lg btn-primary rounded-pill", style:"background-color: #5A81E3; border: none" %>
           </div>
         <% end %>
     </div>

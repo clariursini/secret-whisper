@@ -19,27 +19,42 @@
 
       </div>
       <div class="container mt-3">
-        <div class="messages text-center">
-          <p style="margin-bottom: 2rem;">Choose your hand</p>
+        <div class="messages text-center bg-black">
+          <p style="margin-bottom: 2rem; color: white">Choose your hand</p>
             <%= simple_form_for @game do |f| %>
+
               <div class="field">
+                <p style="color: white" class="m-0 p-0 align-self-center ">1º</p>
                 <%= f.collection_radio_buttons(:hand2, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand2| %>
-                  <%= hand2.label { image_tag("#{hand2.text}.png") + hand2.radio_button  } %>
+                  <div class="rounded-circle p-1 hand2">
+                  <%= hand2.label {image_tag("#{hand2.text}.png")}  %>
+                  </div>
+                  <%= hand2.radio_button class:"d-none"%>
                 <% end %>
               </div>
+
               <div class="field">
+                <p style="color: white" class="m-0 p-0 align-self-center ">2º</p>
                 <%= f.collection_radio_buttons(:hand4, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand4| %>
-                  <%= hand4.label { image_tag("#{hand4.text}.png") + hand4.radio_button  } %>
+                  <div class="rounded-circle p-1 hand4">
+                  <%= hand4.label {image_tag("#{hand4.text}.png")}  %>
+                  </div>
+                  <%= hand4.radio_button class:"d-none"%>
                 <% end %>
               </div>
+
               <div class="field">
+                <p style="color: white" class="m-0 p-0 align-self-center ">3º</p>
                 <%= f.collection_radio_buttons(:hand6, [['Rock', 'rock'], ['Paper', 'paper'], ['Scissors', 'scissors']], :first, :last, :item_wrapper_class => 'horizontal') do |hand6| %>
-                  <%= hand6.label { image_tag("#{hand6.text}.png") + hand6.radio_button  } %>
+                  <div class="rounded-circle p-1 hand6">
+                  <%= hand6.label {image_tag("#{hand6.text}.png")}  %>
+                  </div>
+                  <%= hand6.radio_button class:"d-none"%>
                 <% end %>
               </div>
 
               <div>
-                <%= f.button :submit, class: "btn btn-primary" %>
+                <%= f.button :submit, "Let's play", class: "btn btn-lg btn-primary rounded-pill", style:"background-color: #5A81E3; border: none" %>
               </div>
             <% end %>
         </div>
