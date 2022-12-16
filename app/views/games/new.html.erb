@@ -1,21 +1,32 @@
+<%# ------------------------NAVBAR-------------------- %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="col-1 d-flex justify-content-center">
+    <%= link_to bar_path(current_user.bar_code), class: "navbar-brand" do %>
+      <svg style = "margin-left: 20px;" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 2L2 9L9 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    <% end %>
+  </div>
+  <div class="col-11 d-flex justify-content-center">
+    <p style= "margin: 0; font-size: 16px; color: white; margin-left: -20px;">Game</h1>
+  </div>
+</div>
+
+<%# ------------------------MAIN-------------------- %>
 <div class="container mt-3 bg-black">
   <% opponent = User.find(params[:player2_id]) %>
 
-  <div class="container d-flex align-items-center">
-
-    <% if opponent.photo.key != nil %>
-      <%= cl_image_tag opponent.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
-    <% else %>
-      <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
-    <% end %>
-
-    <h1 style="margin-top:20px;"><%= opponent.name %> <small><small><em>is your opponent, now it's your turn</em></small></small></h1>
-
-  </div>
+  <%# <div class="container d-flex align-items-center"> %>
+    <%# if opponent.photo.key != nil %>
+      <%#= cl_image_tag opponent.photo.key, class:"avatar-large", style:"margin-right:15px;" %>
+    <%# else %>
+      <%#= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class:"avatar-large" %>
+    <%# end %>
+  <%# </div> %>
 
   <div class="container mt-3">
     <div class="messages text-center bg-black">
-      <p style="margin-bottom: 2rem; color: white">Make 3 moves</p>
+      <p style="margin-bottom: 2rem; color: white; font-weight: 700; font-size: 16px;">Make 3 moves</p>
         <%= simple_form_for @game do |f| %>
           <%= hidden_field_tag(:player1_id, current_user.id) %>
           <%= hidden_field_tag(:player2_id, opponent.id) %>
@@ -48,7 +59,7 @@
             <% end %>
           </div>
           <div>
-            <%= f.button :submit, "Let's play", class: "btn btn-lg btn-primary rounded-pill", style:"background-color: #5A81E3; border: none" %>
+            <%= f.button :submit, "Let's play", class: "white-round-filled-btn", style: "padding-right: 10px; padding-left: 10px; width: 103px; height: 41px; margin-top: 20px; background-color: #5A81E3; border: none; color: white; font-weight: 600;"%>
           </div>
         <% end %>
     </div>
