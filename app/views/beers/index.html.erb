@@ -40,7 +40,7 @@
             <% if @target.present? %>
               <div data-controller="beer-delete">
                 <%= simple_form_for @target, url: beer_path(@target), method: :delete do |f| %>
-                  <%= f.button :button, style: "padding:0;" do %>
+                  <%= f.button :button, style: "padding:0;", class:"submit-delete-beer" do %>
                     <%# <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i> %>
                     <p class="white-round-filled-btn" style="color: black; width: 75px; height: 30px;background: white; font-weight: 600; font-size: 14px; text-align: center;">Conection</p>
                   <% end %>
@@ -51,7 +51,7 @@
                 <%= simple_form_for @beer do |f| %>
                   <%= hidden_field_tag(:sender_id, current_user.id) %>
                   <%= hidden_field_tag(:recipient_id, beer.sender.id) %>
-                  <%= f.button :button, style: "padding:0;" do %>
+                  <%= f.button :button, style: "padding:0;", class:"submit-create-beer" do %>
                     <%# <i class="fa-solid fa-beer-mug-empty" data-beer-icon-target="beer" data-action="click->beer-icon#addBeer"></i> %>
                     <p class="white-round-filled-btn" style="color: white; width: 75px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Return</p>
                   <% end %>
@@ -65,18 +65,38 @@
 </div>
 
 <script>
+  const submitCreateBeer = document.querySelectorAll('.submit-create-beer');
+  const submitDeleteBeer = document.querySelectorAll('.submit-delete-beer');
+
+  submitCreateBeer.forEach((button) => {
+    button.addEventListener('click', e => {
+      setTimeout(() => {
+        location.reload()
+      }, 500);
+    })
+  })
+
+  submitDeleteBeer.forEach((button) => {
+    button.addEventListener('click', e => {
+       setTimeout(() => {
+        location.reload()
+      }, 500);
+    })
+  })
+
   // window.onpopstate = function () {
   //   location.reload()
   // };
 
-    if( window.localStorage )
-    {
-      if( !localStorage.getItem('firstLoad') )
-      {
-        localStorage['firstLoad'] = true;
-        window.location.reload();
-      }
-      else
-        localStorage.removeItem('firstLoad');
-    }
+  //   if( window.localStorage )
+  //   {
+  //     if( !localStorage.getItem('firstLoad') )
+  //     {
+  //       localStorage['firstLoad'] = true;
+  //       window.location.reload();
+  //     }
+  //     else
+  //       localStorage.removeItem('firstLoad');
+  //   }
+
 </script>

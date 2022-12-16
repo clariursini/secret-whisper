@@ -31,13 +31,18 @@ const createDivs = document.querySelectorAll(".create-beer-div")
 const toggleCreateDivs = (index) => {
   deleteDivs[index].classList.remove("d-none")
   createDivs[index].classList.add("d-none")
-  location.reload();
+  setTimeout(() => {
+    location.reload()
+  }, 1000);
+
 }
 
 const toggleDeleteDivs = (index) => {
   deleteDivs[index].classList.add("d-none")
   createDivs[index].classList.remove("d-none")
-  location.reload();
+  setTimeout(() => {
+    location.reload()
+  }, 1000);
 }
 
 createBtns.forEach((btn, index) => {
@@ -121,3 +126,9 @@ hand6.forEach((hand) => {
     hand.classList.add("bg-secondary")
   })
 })
+
+window.addEventListener('popstate', function (event) {
+	// Log the state data to the console
+  console.log("entro al metodo popstateeeee")
+	console.log(event.state);
+});
