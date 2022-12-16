@@ -1,5 +1,20 @@
-<div class="container registration-form">
-  <h2 class="mb-4">Log in</h2>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+
+      <div class="col-1 d-flex justify-content-center">
+        <%= link_to root_path, class: "navbar-brand" do %>
+          <svg style = "margin-left: 20px;" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M9 2L2 9L9 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        <% end %>
+      </div>
+
+      <div class="col-11 d-flex justify-content-center">
+        <p style= "margin: 0; font-size: 16px; color: white; margin-left: -20px;">Log in</h1>
+      </div>
+
+</div>
+
+<div class="container registration-form d-flex flex-column">
 
   <%= simple_form_for(resource, as: resource_name, url: session_path(resource_name), data: { turbo: :false }) do |f| %>
     <div class="form-inputs">
@@ -19,7 +34,7 @@
     </div>
   <% end %>
 
-  <div class="d-flex justify-content-center mt-5 text-center" style="border-top: solid 1px white;">
+  <div class="d-flex justify-content-center mt-5 text-center" style="border-top: solid 1px white;     margin-top: 50% !important;">
     <p style="color: white; margin-top: 10px;">or <%= render "devise/shared/links" %></p>
   </div>
 

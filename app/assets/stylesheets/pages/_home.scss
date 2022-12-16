@@ -7,3 +7,43 @@ body {
 h2, h1, h3 {
   color: white;
 }
+
+.home .container{
+  margin-top: 10.56%;
+}
+
+.subtitle-home{
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 600;
+  font-size: 16px;
+  line-height: 23px;
+  color: #FFFFFF;
+}
+
+.header-home{
+  align-items: center;
+  justify-content: center;
+}
+
+.header-home img {
+  width: 42px;
+  height: 38px;
+  margin: 0;
+}
+
+.header-home h1 {
+  font-family: 'Source Sans 3';
+  font-style: normal;
+  font-weight: 700;
+  font-size: 40px;
+  line-height: 57px;
+  color: #FFFFFF;
+  margin: 0;
+  margin-right: 10px;
+}
+
+.home h2{
+  margin-top: 63px;
+  margin-bottom: 152px !important;
+}

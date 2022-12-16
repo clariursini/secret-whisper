@@ -10,7 +10,8 @@ export default class extends Controller {
   }
 
   removeBeer() {
-    this.removeTarget.classList.remove("fa-champagne-glasses")
-    this.removeTarget.classList.add("fa-beer-mug-empty")
+    this.removeTarget.classList.toggle("d-none")
+    // this.removeTarget.classList.remove("fa-champagne-glasses")
+    // this.removeTarget.classList.add("fa-beer-mug-empty")
   }
 }

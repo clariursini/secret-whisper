@@ -3,6 +3,8 @@ import "@hotwired/turbo-rails"
 import "./controllers"
 import "bootstrap"
 
+// ---------------BARCODE---------------------------- //
+
 if (window.location.href.includes("?barcode=")) {
   let barcode = window.location.href.split("?barcode=")[1]
   localStorage.setItem("barcode", barcode);
@@ -18,6 +20,8 @@ if (hiddenDiv && localStorage.getItem("barcode")) {
     .then(res => localStorage.removeItem("barcode"))
     .catch(err => console.log(err));
 }
+
+// ---------------BEER BUTTONS---------------------------- //
 
 const createBtns = document.querySelectorAll(".create-beer")
 const deleteBtns = document.querySelectorAll(".delete-beer")
