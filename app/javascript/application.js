@@ -57,3 +57,63 @@ deleteBtns.forEach((btn, index) => {
       .catch((err) => console.log(err));
   })
 })
+
+const hand1 = document.querySelectorAll(".hand1")
+hand1.forEach((hand) => {
+  hand.addEventListener('click', e => {
+    hand1.forEach((mano) => {
+      mano.classList.remove("bg-secondary")
+    })
+    hand.classList.add("bg-secondary")
+  })
+})
+
+const hand2 = document.querySelectorAll(".hand2")
+hand2.forEach((hand) => {
+  hand.addEventListener('click', e => {
+    hand2.forEach((mano) => {
+      mano.classList.remove("bg-secondary")
+    })
+    hand.classList.add("bg-secondary")
+  })
+})
+
+const hand3 = document.querySelectorAll(".hand3")
+hand3.forEach((hand) => {
+  hand.addEventListener('click', e => {
+    hand3.forEach((mano) => {
+      mano.classList.remove("bg-secondary")
+    })
+    hand.classList.add("bg-secondary")
+  })
+})
+
+const hand4 = document.querySelectorAll(".hand4")
+hand4.forEach((hand) => {
+  hand.addEventListener('click', e => {
+    hand4.forEach((mano) => {
+      mano.classList.remove("bg-secondary")
+    })
+    hand.classList.add("bg-secondary")
+  })
+})
+
+const hand5 = document.querySelectorAll(".hand5")
+hand5.forEach((hand) => {
+  hand.addEventListener('click', e => {
+    hand5.forEach((mano) => {
+      mano.classList.remove("bg-secondary")
+    })
+    hand.classList.add("bg-secondary")
+  })
+})
+
+const hand6 = document.querySelectorAll(".hand6")
+hand6.forEach((hand) => {
+  hand.addEventListener('click', e => {
+    hand6.forEach((mano) => {
+      mano.classList.remove("bg-secondary")
+    })
+    hand.classList.add("bg-secondary")
+  })
+})
