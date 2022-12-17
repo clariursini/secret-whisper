@@ -38,7 +38,8 @@
 
             <% @target = Beer.where(sender_id: beer.recipient, recipient_id: beer.sender).first %>
             <% if @target.present? %>
-              <div data-controller="beer-delete">
+              <%# <div data-controller="beer-delete"> %>
+              <div>
                 <%= simple_form_for @target, url: beer_path(@target), method: :delete do |f| %>
                   <%= f.button :button, style: "padding:0;", class:"submit-delete-beer" do %>
                     <%# <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i> %>
@@ -47,7 +48,8 @@
                 <% end %>
               </div>
             <% else %>
-              <div data-controller="beer-icon">
+              <div>
+              <%# <div data-controller="beer-icon"> %>
                 <%= simple_form_for @beer do |f| %>
                   <%= hidden_field_tag(:sender_id, current_user.id) %>
                   <%= hidden_field_tag(:recipient_id, beer.sender.id) %>
