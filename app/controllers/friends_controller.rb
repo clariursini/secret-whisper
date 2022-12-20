@@ -7,8 +7,13 @@ class FriendsController < ApplicationController
   end
 
   def show
-    @user = User.find(params[:sender_id], params[:recipient_id])
+    if params[:sender_id].nil? && params[:recipient_id].nil?
+      @user = User.find(params[:format])
+    else
+      @user = User.find(params[:sender_id], params[:recipient_id])
+    end
     @conversation = Conversation.new
     @beer = Beer.new
+    @beers = Beer.all
   end
 end
