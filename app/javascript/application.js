@@ -67,6 +67,8 @@ deleteBtns.forEach((btn, index) => {
   })
 })
 
+// ---------------GAME CHOICES---------------------------- //
+
 const hand1 = document.querySelectorAll(".hand1")
 hand1.forEach((hand) => {
   hand.addEventListener('click', e => {

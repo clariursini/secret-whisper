@@ -69,6 +69,7 @@
 
 
 <script>
+// ---------------- IMAGE PREVIEW -------------------------------//
 
   const previewImageOnFileSelect = () => {
   // we select the photo input
@@ -93,4 +94,17 @@ const displayPreview = (input) => {
 if (window.location.href.includes("new_post")) {
   previewImageOnFileSelect()
 }
+
+  // ---------------- RELOAD PAGE -------------------------------//
+    if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }
+    else
+      localStorage.removeItem('firstLoad');
+  }
+
 </script>

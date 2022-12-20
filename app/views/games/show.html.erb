@@ -1,16 +1,30 @@
-<div class="container mt-4">
+<%# ------------------------NAVBAR-------------------- %>
+<div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
+  <div class="col-1 d-flex justify-content-center">
+    <%= link_to bar_path(current_user.bar_code), class: "navbar-brand" do %>
+      <svg style = "margin-left: 20px;" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <path d="M9 2L2 9L9 16" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+      </svg>
+    <% end %>
+  </div>
+  <div class="col-11 d-flex justify-content-center">
+    <p style= "margin: 0; font-size: 16px; color: white; margin-left: -20px;">Game</h1>
+  </div>
+</div>
 
-  <h3>Game show</h1>
+<%# ------------------------MAIN-------------------- %>
+
+<div class="container mt-4">
 
   <%# IF THE GAME IS FINISHED %>
   <% if @game.winner_id != nil  %>
     <div class="row d-flex notification">
       <div class="column col-6 text-center">
         <% @player1 = User.find(@game.player1_id) %>
-        <p class="mb-2">Player 1</p>
+        <%# <p class="mb-2">Player 1</p> %>
 
         <div class="profile-user">
-          <%= link_to profile_path(@player1) do %>
+          <%= link_to profile_path(@player1.id) do %>
             <% if @player1.photo.key != nil %>
               <%= cl_image_tag @player1.photo.key, class: "avatar" %>
             <% else %>
@@ -19,7 +33,7 @@
           <% end %>
 
           <div class="notification-content">
-            <%= link_to profile_path(@player1) do %>
+            <%= link_to profile_path(@player1.id) do %>
               <p><strong><%=@player1.name %></strong></p>
             <% end %>
           </div>
@@ -27,41 +41,41 @@
 
         <div class="move mt-3">
           <p class="mb-2">Moves:</p>
-          <div class="d-flex flex-column">
-            <% if @game.hand1 == "Scissors" %>
-              <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+          <div class="d-flex flex-column align-items-center">
+            <% if @game.hand2 == "Scissors" %>
+              <%= image_tag("scissors", height: '60', width: '60')%>
             <% end %>
 
-            <% if @game.hand1 == "Rock" %>
-              <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+            <% if @game.hand2 == "Rock" %>
+              <%= image_tag("rock", height: '60', width: '60')%>
             <% end %>
 
-            <% if @game.hand1 == "Paper" %>
-              <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+            <% if @game.hand2 == "Paper" %>
+              <%= image_tag("paper", height: '60', width: '60')%>
             <% end %>
 
-            <% if @game.hand3 == "Scissors" %>
-              <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+            <% if @game.hand4 == "Scissors" %>
+              <%= image_tag("scissors", height: '60', width: '60')%>
             <% end %>
 
-            <% if @game.hand3 == "Rock" %>
-              <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+            <% if @game.hand4 == "Rock" %>
+              <%= image_tag("rock", height: '60', width: '60')%>
             <% end %>
 
-            <% if @game.hand3 == "Paper" %>
-              <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+            <% if @game.hand4 == "Paper" %>
+              <%= image_tag("paper", height: '60', width: '60')%>
             <% end %>
 
-            <% if @game.hand5 == "Scissors" %>
-              <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+            <% if @game.hand6 == "Scissors" %>
+              <%= image_tag("scissors", height: '60', width: '60')%>
             <% end %>
 
-            <% if @game.hand5 == "Rock" %>
-              <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+            <% if @game.hand6 == "Rock" %>
+              <%= image_tag("rock", height: '60', width: '60')%>
             <% end %>
 
-            <% if @game.hand5 == "Paper" %>
-              <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+            <% if @game.hand6 == "Paper" %>
+              <%= image_tag("paper", height: '60', width: '60')%>
             <% end %>
           </div>
         </div>
@@ -69,10 +83,10 @@
 
       <div class="column col-6 text-center">
         <% @player2 = User.find(@game.player2_id) %>
-        <p class="mb-2">Player 2</p>
+        <%# <p class="mb-2">Player 2</p> %>
 
         <div class="profile-user">
-          <%= link_to profile_path(@player2) do %>
+          <%= link_to profile_path(@player2.id) do %>
             <% if @player2.photo.key != nil %>
               <%= cl_image_tag @player2.photo.key, class: "avatar" %>
             <% else %>
@@ -81,7 +95,7 @@
           <% end %>
 
           <div class="notification-content">
-            <%= link_to profile_path(@player2) do %>
+            <%= link_to profile_path(@player2.id) do %>
               <p><strong><%=@player2.name %></strong></p>
             <% end %>
           </div>
@@ -89,41 +103,41 @@
 
         <div class="move mt-3">
           <p class="mb-2">Moves:</p>
-          <div class="d-flex flex-column">
+          <div class="d-flex flex-column align-items-center">
             <% if @game.hand2 == "Scissors" %>
-              <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("scissors", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand2 == "Rock" %>
-              <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("rock", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand2 == "Paper" %>
-              <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("paper", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand4 == "Scissors" %>
-              <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("scissors", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand4 == "Rock" %>
-              <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("rock", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand4 == "Paper" %>
-              <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("paper", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand6 == "Scissors" %>
-              <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("scissors", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand6 == "Rock" %>
-              <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("rock", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand6 == "Paper" %>
-              <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("paper", height: '60', width: '60')%>
             <% end %>
           </div>
         </div>
@@ -139,7 +153,7 @@
         <% @winner = User.find(@game.winner_id) %>
 
         <div class="profile-user">
-          <%= link_to profile_path(@winner) do %>
+          <%= link_to profile_path(@winner.id) do %>
             <% if @winner.photo.key != nil %>
               <%= cl_image_tag @winner.photo.key, class: "avatar" %>
             <% else %>
@@ -148,7 +162,7 @@
           <% end %>
 
           <div class="notification-content">
-            <%= link_to profile_path(@winner) do %>
+            <%= link_to profile_path(@winner.id) do %>
               <p><strong><%=@winner.name %></strong></p>
             <% end %>
           </div>
@@ -170,10 +184,10 @@
     <div class="row d-flex notification">
       <div class="column col-6 text-center">
         <% @player1 = User.find(@game.player1_id) %>
-        <p class="mb-2">Player 1</p>
+        <%# <p class="mb-2">Player 1</p> %>
 
         <div class="profile-user">
-          <%= link_to profile_path(@player1) do %>
+          <%= link_to profile_path(@player1.id) do %>
             <% if @player1.photo.key != nil %>
               <%= cl_image_tag @player1.photo.key, class: "avatar" %>
             <% else %>
@@ -182,7 +196,7 @@
           <% end %>
 
           <div class="notification-content">
-            <%= link_to profile_path(@player1) do %>
+            <%= link_to profile_path(@player1.id) do %>
               <p><strong><%=@player1.name %></strong></p>
             <% end %>
           </div>
@@ -190,41 +204,41 @@
 
         <div class="move mt-3">
           <p class="mb-2">Moves:</p>
-          <div class="d-flex flex-column">
+          <div class="d-flex flex-column align-items-center">
             <% if @game.hand1 == "Scissors" %>
-              <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("scissors", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand1 == "Rock" %>
-              <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("rock", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand1 == "Paper" %>
-              <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("paper", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand3 == "Scissors" %>
-              <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("scissors", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand3 == "Rock" %>
-              <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("rock", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand3 == "Paper" %>
-              <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("paper", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand5 == "Scissors" %>
-              <i class="fa-solid fa-hand-scissors mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("scissors", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand5 == "Rock" %>
-              <i class="fa-solid fa-hand-back-fist mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("rock", height: '60', width: '60')%>
             <% end %>
 
             <% if @game.hand5 == "Paper" %>
-              <i class="fa-solid fa-hand mb-2" style="font-size: 45px;"></i>
+              <%= image_tag("paper", height: '60', width: '60')%>
             <% end %>
           </div>
         </div>
@@ -232,10 +246,10 @@
 
       <div class="column col-6 text-center">
         <% @player2 = User.find(@game.player2_id) %>
-        <p class="mb-2">Player 2</p>
+        <%# <p class="mb-2">Player 2</p> %>
 
         <div class="profile-user">
-          <%= link_to profile_path(@player2) do %>
+          <%= link_to profile_path(@player2.id) do %>
             <% if @player2.photo.key != nil %>
               <%= cl_image_tag @player2.photo.key, class: "avatar" %>
             <% else %>
@@ -244,7 +258,7 @@
           <% end %>
 
           <div class="notification-content">
-            <%= link_to profile_path(@player2) do %>
+            <%= link_to profile_path(@player2.id) do %>
               <p><strong><%=@player2.name %></strong></p>
             <% end %>
           </div>
@@ -253,9 +267,15 @@
         <div class="move mt-3">
           <p class="mb-2">Moves:</p>
           <div class="d-flex flex-column">
-            <i class="fa-solid fa-hourglass-start mb-2" style="font-size: 45px;"></i>
-            <i class="fa-solid fa-hourglass-start mb-2" style="font-size: 45px;"></i>
-            <i class="fa-solid fa-hourglass-start mb-2" style="font-size: 45px;"></i>
+            <div style="display: flex; height: 60px; justify-content: center; align-items: flex-end;">
+              <i class="fa-solid fa-hourglass-start mb-2" style="font-size: 45px; color: white;"></i>
+            </div>
+            <div style="display: flex; height: 60px; justify-content: center; align-items: flex-end;">
+              <i class="fa-solid fa-hourglass-start mb-2" style="font-size: 45px; color: white;"></i>
+            </div>
+            <div style="display: flex; height: 60px; justify-content: center; align-items: flex-end;">
+              <i class="fa-solid fa-hourglass-start mb-2" style="font-size: 45px; color: white;"></i>
+            </div>
           </div>
         </div>
       </div>
@@ -266,5 +286,19 @@
     </div>
 
   <% end %>
-
 </div>
+
+<%# ------------------------RELOAD-------------------- %>
+
+<script>
+    if( window.localStorage )
+    {
+      if( !localStorage.getItem('firstLoad') )
+      {
+        localStorage['firstLoad'] = true;
+        window.location.reload();
+      }
+      else
+        localStorage.removeItem('firstLoad');
+    }
+</script>

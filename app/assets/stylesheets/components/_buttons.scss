@@ -17,6 +17,16 @@
   font-weight: bold;
 }
 
+.white-outlined-btn:hover, .white-outlined-big-btn:hover{
+  background-color: rgb(56, 54, 54);
+}
+
+.white-round-filled-btn:hover, .white-round-filled-big-btn:hover {
+  border: 3px solid rgb(56, 54, 54);
+  background-color: white;
+  color: black;
+}
+
 .white-round-filled-big-btn {
   border-radius: 50px;
   background-color: white;

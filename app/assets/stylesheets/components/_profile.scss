@@ -1,13 +1,13 @@
 .profile-photo {
+  height: 400px;
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+  align-items: flex-end;
+  justify-content: space-between;
 }
 
 .profile-photo img {
-  width: 250px;
-  height: 200px;
-  border-radius: 20%;
+  width: 100%;
+  height: 360px;
 }
 
 .profile i, .profile h1, .profile p {

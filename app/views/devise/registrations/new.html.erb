@@ -1,5 +1,5 @@
+<%# ----------------- NAVBAR --------------------------------------- %>
 <div class="navbar navbar-expand-sm navbar-light navbar-lewagon">
-
       <div class="col-1 d-flex justify-content-center">
         <%= link_to root_path, class: "navbar-brand" do %>
           <svg style = "margin-left: 20px;" width="11" height="18" viewBox="0 0 11 18" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -11,47 +11,209 @@
       <div class="col-11 d-flex justify-content-center">
         <p style= "margin: 0; font-size: 16px; color: white; margin-left: -20px;">Register</h1>
       </div>
-
 </div>
 
+<%# ----------------- NMAIN --------------------------------------- %>
 <div class="container registration-form">
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), data: { turbo: :false }) do |f| %>
-    <%= f.error_notification %>
+    <%#= f.error_notification %>
 
-    <div class="form-inputs">
-      <%= f.input :name,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "Name" },
-                  placeholder: "Name" %>
-      <%= f.input :gender,
-                  as: :select, collection: ["Female", "Male", "Other"],
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "Select from drop down" },
-                  placeholder: "Select your gender" %>
-      <%= f.input :email,
-                  required: true,
-                  autofocus: true,
-                  input_html: { autocomplete: "email" },
-                  placeholder: "example@domain.com" %>
-      <%= f.input :password,
-                  required: true,
-                  hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
-                  input_html: { autocomplete: "new-password" } %>
-      <%= f.input :password_confirmation,
-                  required: true,
-                  input_html: { autocomplete: "new-password" } %>
+    <div class="form-inputs" id="regForm" action="">
+      <div class="tab">
+        <p style="color: white; font-weight: 700; font-size: 20px;">Email</p>
+        <%= f.input :email,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "email", oninput: "this.className = ''" },
+                    placeholder: "example@domain.com",
+                    label: false %>
+      </div>
+      <div class="tab">
+        <p style="color: white; font-weight: 700; font-size: 20px;">Create Password</p>
+        <%= f.input :password,
+                    required: true,
+                    hint: ("#{@minimum_password_length} characters minimum" if @minimum_password_length),
+                    input_html: { autocomplete: "new-password", oninput: "this.className = ''"  },
+                    label: false %>
+        <%#= f.input :password_confirmation,
+                    required: true,
+                    input_html: { autocomplete: "new-password", oninput: "this.className = ''"  } %>
+      </div>
+      <div class="tab">
+        <p style="color: white; font-weight: 700; font-size: 20px;">Gender</p>
+        <%= f.input :gender,
+                    as: :select, collection: ["Female", "Male", "Other", "Non-Binary", "I'd rather not say"],
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "Select from drop down", oninput: "this.className = ''", class: "d-none" },
+                    placeholder: "Select your gender",
+                    label: false %>
+        <div class="d-flex flex-column">
+          <div class="d-flex">
+            <p class="gender-btn white-outlined-btn" style="width: 72px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px;">Female</p>
+            <p class="gender-btn white-outlined-btn" style="width: 72px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px;">Male</p>
+            <p class="gender-btn white-outlined-btn" style="width: 100px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px;">Non-Binary</p>
+          </div>
+          <div class="d-flex">
+            <p class="gender-btn white-outlined-btn" style="width: 72px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px;">Other</p>
+            <p class="gender-btn white-outlined-btn" style="width: 120px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px;">I'd rather not say</p>
+          </div>
+        </div>
+      </div>
+
+      <%# <div class="tab"> %>
+        <%# <p style="color: white; font-weight: 700; font-size: 20px;">Gender</p> %>
+        <%# <%= f.collection_radio_buttons(:gender, [['Female'], ['Male'], ['Other']], :first, :last, :item_wrapper_class => 'horizontal', input_html:{oninput: "this.className = ''"}) do |g| %>
+              <%# <div class="rounded-circle p-1 hand3"> %>
+              <%# <%= g.label {g.text} %>
+              <%# </div> %>
+              <%# <%= g.radio_button class:"d-none" %>
+            <%# <% end %>
+      <%# </div> %>
+
+
+      <div class="tab">
+        <p style="color: white; font-weight: 700; font-size: 20px;">Name</p>
+        <%= f.input :name,
+                    required: true,
+                    autofocus: true,
+                    input_html: { autocomplete: "Name", oninput: "this.className = ''"  },
+                    placeholder: "Name",
+                    label: false %>
+      </div>
     </div>
 
-    <div class="form-actions text-center mt-5">
-      <%= f.button :submit, "Register", class: "white-round-filled-btn", style: "width: 120px;", id:"submit-button" %>
+    <!-- Next, Previous and Register buttons -->
+    <div style="overflow:auto;" class=>
+      <div style="text-align: center; margin-top: 20px;">
+        <button type="button" class= "white-round-filled-btn" style="width: 120px;" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+        <button type="button" class= "white-round-filled-btn" style="width: 120px;" id="nextBtn" onclick="nextPrev(1)">Continue</button>
+        <%= f.button :submit, "Create Account", class: "white-round-filled-btn d-none", style: "width: 120px;", id:"submit-button" %>
+      </div>
+    </div>
+
+    <!-- Circles which indicates the steps of the form: -->
+    <div style="text-align:center;margin-top:40px;">
+      <span class="step"></span>
+      <span class="step"></span>
+      <span class="step"></span>
+      <span class="step"></span>
     </div>
   <% end %>
 
-  <div class="d-flex justify-content-center mt-5 text-center" style="border-top: solid 1px white;">
+</div>
+
+<div class="container d-flex justify-content-center">
+    <div class="shared-links d-flex justify-content-center text-center" style="border-top: solid 1px white; margin-top: 80%;">
     <p style="color: white; margin-top: 10px;">or <%= render "devise/shared/links" %></p>
   </div>
 
 </div>
+
+<script>
+
+  // ----------------MULTI STEP FORM -------------------------------//
+
+  var currentTab = 0; // Current tab is set to be the first tab (0)
+  showTab(currentTab); // Display the current tab
+
+  function showTab(n) {
+    // This function will display the specified tab of the form ...
+    var x = document.getElementsByClassName("tab");
+    x[n].style.display = "block";
+    // ... and fix the Previous/Next buttons:
+    if (n == 0) {
+      document.getElementById("prevBtn").style.display = "none";
+    } else {
+      document.getElementById("prevBtn").style.display = "inline";
+    }
+    if (n == (x.length - 1)) {
+      document.getElementById("nextBtn").classList.add("d-none");
+      document.getElementById("submit-button").classList.remove("d-none");
+    } else {
+      document.getElementById("nextBtn").classList.remove("d-none");
+      document.getElementById("submit-button").classList.add("d-none");
+    }
+    // ... and run a function that displays the correct step indicator:
+    fixStepIndicator(n)
+  }
+
+  function nextPrev(n) {
+    // This function will figure out which tab to display
+    var x = document.getElementsByClassName("tab");
+    // Exit the function if any field in the current tab is invalid:
+    if (n == 1 && !validateForm()) return false;
+    // Hide the current tab:
+    x[currentTab].style.display = "none";
+    // Increase or decrease the current tab by 1:
+    currentTab = currentTab + n;
+    // if you have reached the end of the form... :
+    if (currentTab >= x.length) {
+      //...the form gets submitted:
+      document.getElementById("regForm").submit();
+      return false;
+    }
+    // Otherwise, display the correct tab:
+    showTab(currentTab);
+  }
+
+  function validateForm() {
+    // This function deals with validation of the form fields
+    var x, y, i, valid = true;
+    x = document.getElementsByClassName("tab");
+    y = x[currentTab].getElementsByTagName("input");
+    // A loop that checks every input field in the current tab:
+    for (i = 0; i < y.length; i++) {
+      // If a field is empty...
+      if (y[i].value == "") {
+        // add an "invalid" class to the field:
+        y[i].className += " invalid";
+        // and set the current valid status to false:
+        valid = false;
+      }
+    }
+    // If the valid status is true, mark the step as finished and valid:
+    if (valid) {
+      document.getElementsByClassName("step")[currentTab].className += " finish";
+    }
+    return valid; // return the valid status
+  }
+
+  function fixStepIndicator(n) {
+    // This function removes the "active" class of all steps...
+    var i, x = document.getElementsByClassName("step");
+    for (i = 0; i < x.length; i++) {
+      x[i].className = x[i].className.replace(" active", "");
+    }
+    //... and adds the "active" class to the current step:
+    x[n].className += " active";
+  }
+
+  // ---------------- RELOAD PAGE -------------------------------//
+    if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }
+    else
+      localStorage.removeItem('firstLoad');
+  }
+
+  // ----------------SELECT BUTTONS ON CLICK -------------------------------//
+  const gender = document.querySelectorAll(".gender-btn")
+  gender.forEach((btn) => {
+    btn.addEventListener('click', e => {
+      gender.forEach((button) => {
+        button.classList.remove("bg-white")
+        button.classList.remove("text-black")
+        document.getElementById('user_gender').value = btn.innerText
+      })
+      btn.classList.add("bg-white")
+      btn.classList.add("text-black")
+    })
+  })
+
+</script>
