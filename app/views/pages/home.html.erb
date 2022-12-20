@@ -6,9 +6,18 @@
     </div>
     <h2 class="mb-3 subtitle-home">Conect with the people aroud you</h2>
     <div class="container d-flex flex-column pl-5 pr-5 mb-5" style="align-items: center; justify-content: space-around;">
-      <%= link_to 'Register', new_user_registration_path, class: "white-round-filled-big-btn mb-3" %>
+      <%= link_to 'Register', new_user_registration_path, class: "white-round-filled-big-btn mb-3", id: "registration-btn" %>
       <%= link_to 'Login', new_user_session_path, class: "white-outlined-big-btn" %>
     </div>
 
   </div>
 </div>
+
+<script>
+  const registrationBtn = document.getElementById('registration-btn');
+  registrationBtn.addEventListener('click', () => {
+    setTimeout(() => {
+      location.reload();
+    }, 500);
+  });
+</script>
