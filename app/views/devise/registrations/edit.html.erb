@@ -14,17 +14,17 @@
 
 <%# ------------------------MAIN-------------------- %>
 
-<div class="container registration-form">
+<div class="container registration-form mt-0">
   <%# <h2>Edit <%= resource_name.to_s.humanize %>
   <%# </h2> %>
 
-  <div class="profile-photo">
+  <div class="edit-photo mb-3">
     <% if current_user.photo.key != nil %>
-      <%= cl_image_tag current_user.photo.key, class: "profile-photo", id: "primer-photo"%>
+      <%= cl_image_tag current_user.photo.key, class: "edit-photo", id: "primer-photo"%>
     <% else %>
-      <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "profile-photo", id: "first-photo" %>
+      <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "edit-photo", id: "first-photo" %>
     <% end %>
-    <img class= "profile-photo d-none" id="user-photo">
+    <img class= "edit-photo d-none" id="user-photo">
   </div>
 
   <%= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f| %>
@@ -34,7 +34,7 @@
       <%#= f.input :photo, as: :file, label: "Upload your profile picture" %>
       <%#= f.input :email, required: true, autofocus: true %>
       <%= f.input :photo, input_html: { class: 'd-none'}, label: false %>
-      <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: image_tag('upload-photo.png')  %>
+      <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo-edit'}, label: image_tag('upload-photo.png')  %>
 
       <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
         <p>Currently waiting confirmation for: <%= resource.unconfirmed_email %></p>
@@ -53,12 +53,32 @@
                   required: false,
                   label: "Age",
                   input_html: { autocomplete: "Age" } %>
-      <%= f.input :gender,
+      <%#= f.input :gender,
                   as: :select, collection: ["Female", "Male", "Other"],
                   required: false,
                   label: "Gender",
                   input_html: { multiple: false, autocomplete: "Gender" } %>
-      <%= f.input :interests,
+      <p style="color: white; font-weight: 400; font-size: 16px;">Gender</p>
+      <%= f.input :gender,
+                    as: :select, collection: ["Female", "Male", "Other", "Non-Binary", "I'd rather not say"],
+                    required: false,
+                    label: "Gender",
+                    autofocus: true,
+                    input_html: { autocomplete: "Select from drop down", oninput: "this.className = ''", class: "d-none" },
+                    placeholder: "Select your gender",
+                    label: false %>
+        <div class="d-flex flex-column">
+          <div class="d-flex">
+            <p class="gender-btn white-outlined-btn" style="width: 72px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px; cursor: pointer">Female</p>
+            <p class="gender-btn white-outlined-btn" style="width: 72px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px; cursor: pointer">Male</p>
+            <p class="gender-btn white-outlined-btn" style="width: 100px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px; cursor: pointer;">Non-Binary</p>
+          </div>
+          <div class="d-flex">
+            <p class="gender-btn white-outlined-btn" style="width: 72px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px; cursor: pointer">Other</p>
+            <p class="gender-btn white-outlined-btn" style="width: 120px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px; cursor: pointer;">I'd rather not say</p>
+          </div>
+        </div>
+      <%#= f.input :interests,
                   as: :select, collection: ["Female", "Male", "Other", "Both"],
                   required: false,
                   label: "Interested in:",
@@ -91,6 +111,7 @@
 </div>
 
 <script>
+  // ---------------- IMAGE PREVIEW -------------------------------//
 
   const previewImageOnFileSelect = () => {
   // we select the photo input
@@ -115,4 +136,35 @@ const displayPreview = (input) => {
 if (window.location.href.includes("users/edit")) {
   previewImageOnFileSelect()
 }
+
+  // ---------------- RELOAD PAGE -------------------------------//
+    if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
+    {
+      localStorage['firstLoad'] = true;
+      window.location.reload();
+    }
+    else
+      localStorage.removeItem('firstLoad');
+  }
+
+  // ----------------SELECT BUTTONS ON CLICK -------------------------------//
+  const gender = document.querySelectorAll(".gender-btn")
+  gender.forEach((btn) => {
+    if (btn.innerText === document.getElementById('user_gender').value) {
+      btn.classList.add("bg-white")
+      btn.classList.add("text-black")
+    }
+    btn.addEventListener('click', e => {
+      gender.forEach((button) => {
+        button.classList.remove("bg-white")
+        button.classList.remove("text-black")
+        document.getElementById('user_gender').value = btn.innerText
+      })
+      btn.classList.add("bg-white")
+      btn.classList.add("text-black")
+    })
+  })
+
 </script>
