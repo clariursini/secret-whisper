@@ -13,58 +13,65 @@
 </div>
 
 <%# ------------------------MAIN-------------------- %>
-
-<div class="container mt-3">
-  <div class="list">
-    <% @beers.each do |beer| %>
-      <div class="notification">
-        <% if beer.sender.photo.key != nil %>
-            <%= link_to profile_path(sender_id: beer.sender.id) do %>
-              <%= cl_image_tag beer.sender.photo.key, class: "avatar-large" %>
-            <% end %>
-            <div class="notification-content">
-              <strong><%= link_to "#{beer.sender.name}", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
-            </div>
-        <% else %>
-            <%= link_to profile_path(sender_id: beer.sender.id) do %>
-              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
-            <% end %>
-            <div class="notification-content">
-              <strong><%= link_to "#{beer.sender.name}", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
-            </div>
-        <% end %>
-
-        <div class="notification-actions">
-
-            <% @target = Beer.where(sender_id: beer.recipient, recipient_id: beer.sender).first %>
-            <% if @target.present? %>
-              <%# <div data-controller="beer-delete"> %>
-              <div>
-                <%= simple_form_for @target, url: beer_path(@target), method: :delete do |f| %>
-                  <%= f.button :button, style: "padding:0;", class:"submit-delete-beer" do %>
-                    <%# <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i> %>
-                    <p class="white-round-filled-btn" style="color: black; width: 75px; height: 30px;background: white; font-weight: 600; font-size: 14px; text-align: center;">Conection</p>
-                  <% end %>
-                <% end %>
+<% @beer_check = @beers.where(sender_id: current_user.id).first || @beers.where(recipient_id: current_user.id).first %>
+<% if @beer_check != nil %>
+  <div class="container mt-3">
+    <div class="list">
+      <% @beers.each do |beer| %>
+        <div class="notification">
+          <% if beer.sender.photo.key != nil %>
+              <%= link_to profile_path(sender_id: beer.sender.id) do %>
+                <%= cl_image_tag beer.sender.photo.key, class: "avatar-large" %>
+              <% end %>
+              <div class="notification-content">
+                <strong><%= link_to "#{beer.sender.name}", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
               </div>
-            <% else %>
-              <div>
-              <%# <div data-controller="beer-icon"> %>
-                <%= simple_form_for @beer do |f| %>
-                  <%= hidden_field_tag(:sender_id, current_user.id) %>
-                  <%= hidden_field_tag(:recipient_id, beer.sender.id) %>
-                  <%= f.button :button, style: "padding:0;", class:"submit-create-beer" do %>
-                    <%# <i class="fa-solid fa-beer-mug-empty" data-beer-icon-target="beer" data-action="click->beer-icon#addBeer"></i> %>
-                    <p class="white-round-filled-btn" style="color: white; width: 75px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Return</p>
-                  <% end %>
-                <% end %>
+          <% else %>
+              <%= link_to profile_path(sender_id: beer.sender.id) do %>
+                <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+              <% end %>
+              <div class="notification-content">
+                <strong><%= link_to "#{beer.sender.name}", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
               </div>
-            <% end %>
+          <% end %>
+
+          <div class="notification-actions">
+
+              <% @target = Beer.where(sender_id: beer.recipient, recipient_id: beer.sender).first %>
+              <% if @target.present? %>
+                <%# <div data-controller="beer-delete"> %>
+                <div>
+                  <%= simple_form_for @target, url: beer_path(@target), method: :delete do |f| %>
+                    <%= f.button :button, style: "padding:0;", class:"submit-delete-beer" do %>
+                      <%# <i class="fa-solid fa-champagne-glasses" data-beer-delete-target="remove" data-action="click->beer-delete#removeBeer"></i> %>
+                      <p class="white-round-filled-btn" style="color: black; width: 75px; height: 30px;background: white; font-weight: 600; font-size: 14px; text-align: center;">Conection</p>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% else %>
+                <div>
+                <%# <div data-controller="beer-icon"> %>
+                  <%= simple_form_for @beer do |f| %>
+                    <%= hidden_field_tag(:sender_id, current_user.id) %>
+                    <%= hidden_field_tag(:recipient_id, beer.sender.id) %>
+                    <%= f.button :button, style: "padding:0;", class:"submit-create-beer" do %>
+                      <%# <i class="fa-solid fa-beer-mug-empty" data-beer-icon-target="beer" data-action="click->beer-icon#addBeer"></i> %>
+                      <p class="white-round-filled-btn" style="color: white; width: 75px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Return</p>
+                    <% end %>
+                  <% end %>
+                </div>
+              <% end %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class="container mt-3">
+    <p style="color: white; text-align:center; margin-bottom: 0;">No beers received yet</p>
+    <p style="color: white; text-align:center;">Interact with people around you</p>
+  </div>
+<% end %>
 
 <script>
   const submitCreateBeer = document.querySelectorAll('.submit-create-beer');

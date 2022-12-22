@@ -12,8 +12,12 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(*)
-    new_post_path
+    video_path
   end
+
+  # def after_sign_up_path_for(*)
+  #   video_path
+  # end
 
   def user_root_path
     bar_path(current_user.bar_code)
