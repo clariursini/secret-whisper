@@ -13,134 +13,141 @@
 </div>
 
 <%# ------------------------MAIN-------------------- %>
+<% @game_check = @games.where(player1_id: current_user.id).first || @games.where(player2_id: current_user.id).first %>
+<% if @game_check != nil %>
+  <div class="container mt-3">
+    <div class="list">
 
-<div class="container mt-3">
-  <div class="list">
-
-    <% @games.each do |game| %>
-      <%# if game.player1_id == current_user.id || game.player2_id == current_user.id %>
-        <% if game.player1_id == current_user.id %>
-          <% opponent = User.find(game.player2_id) %>
-        <% else %>
-          <% opponent = User.find(game.player1_id) %>
-        <% end %>
-
-        <div class="notification">
-          <% if opponent.photo.key != nil %>
-
-            <% if game.player1_id == current_user.id %>
-              <%= link_to profile_path(player2_id: opponent.id) do %>
-                <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
-              <% end %>
-            <% else %>
-              <%= link_to profile_path(player1_id: opponent.id) do %>
-                <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
-              <% end %>
-            <% end %>
-
-            <div class="notification-content d-flex flex-column">
-              <strong><%= link_to "#{opponent.name}", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
-              <% if game.winner_id == nil %>
-                <% if game.player2_id == current_user.id %>
-                  <p style="color: #5A81E3; font-size: 15px;">It is your turn</p>
-                <% else %>
-                  <p style="font-size: 15px;">It is <%= User.find(game.player2_id).name %>'s turn</p>
-                <% end %>
-              <% else %>
-                <% if game.draw == nil %>
-                  <% if User.find(game.winner_id) == current_user %>
-                    <p style="font-size: 15px; color: green;">You won!</p>
-                  <% else %>
-                    <p style="font-size: 15px; color: red;">You lost</p>
-                  <% end %>
-                <% else %>
-                  <p style="font-size: 15px;">It is a draw</p>
-                <% end %>
-              <% end %>
-            </div>
-
+      <% @games.each do |game| %>
+        <%# if game.player1_id == current_user.id || game.player2_id == current_user.id %>
+          <% if game.player1_id == current_user.id %>
+            <% opponent = User.find(game.player2_id) %>
           <% else %>
-
-            <% if game.player1_id == current_user.id %>
-              <%= link_to profile_path(player2_id: opponent.id) do %>
-                <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
-              <% end %>
-            <% else %>
-              <%= link_to profile_path(player1_id: opponent.id) do %>
-                <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
-              <% end %>
-            <% end %>
-            <div class="notification-content d-flex flex-column">
-              <strong><%= link_to "#{opponent.name}", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
-              <% if game.winner_id == nil %>
-                <% if game.player2_id == current_user.id %>
-                  <p style="color: #5A81E3; font-size: 15px;">It is your turn</p>
-                <% else %>
-                  <p style="font-size: 15px;">It is <%= User.find(game.player2_id).name %>'s turn</p>
-                <% end %>
-              <% else %>
-                <% if game.draw == nil %>
-                  <% if User.find(game.winner_id) == current_user %>
-                    <p style="font-size: 15px; color: green;">You won!</p>
-                  <% else %>
-                    <p style="font-size: 15px; color: red;">You lost</p>
-                  <% end %>
-                <% else %>
-                  <p style="font-size: 15px; color: red;">It is a draw</p>
-                <% end %>
-              <% end %>
-            </div>
-
+            <% opponent = User.find(game.player1_id) %>
           <% end %>
 
-          <div class="notification-actions">
+          <div class="notification">
+            <% if opponent.photo.key != nil %>
 
-            <%# IF THE GAME IS FINISHED %>
-            <% if game.winner_id != nil %>
-              <div class="d-flex flex-column">
-                <%= link_to new_game_path(player1_id: current_user.id, player2_id: opponent.id) do  %>
-                  <p style="font-size: 15px; color: white; text-align: center;">Play again</p>
+              <% if game.player1_id == current_user.id %>
+                <%= link_to profile_path(player2_id: opponent.id) do %>
+                  <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
                 <% end %>
-                <% if game.draw == nil %>
-                  <% if User.find(game.winner_id) == current_user %>
-                    <p style="font-size: 15px; color: white;">1/0</p>
+              <% else %>
+                <%= link_to profile_path(player1_id: opponent.id) do %>
+                  <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
+                <% end %>
+              <% end %>
+
+              <div class="notification-content d-flex flex-column">
+                <strong><%= link_to "#{opponent.name}", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
+                <% if game.winner_id == nil %>
+                  <% if game.player2_id == current_user.id %>
+                    <p style="color: #5A81E3; font-size: 15px;">It is your turn</p>
                   <% else %>
-                    <p style="font-size: 15px; color: white;">0/1</p>
+                    <p style="font-size: 15px;">It is <%= User.find(game.player2_id).name %>'s turn</p>
                   <% end %>
                 <% else %>
-                  <p style="font-size: 15px; color: white;">0/0</p>
+                  <% if game.draw == nil %>
+                    <% if User.find(game.winner_id) == current_user %>
+                      <p style="font-size: 15px; color: green;">You won!</p>
+                    <% else %>
+                      <p style="font-size: 15px; color: red;">You lost</p>
+                    <% end %>
+                  <% else %>
+                    <p style="font-size: 15px;">It is a draw</p>
+                  <% end %>
                 <% end %>
               </div>
 
-
-            <%# IF THE GAME IS NOT FINISHED %>
             <% else %>
-              <%# if game.hand2 == nil %>
-                <% if game.player2_id == current_user.id %>
-                  <%# II. Si vos no lo iniciaste --> te lleva al edit %>
-                  <%= link_to edit_game_path(game) do  %>
-                    <p class="white-round-filled-btn" style="color: white; width: 70px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Play!</p>
+
+              <% if game.player1_id == current_user.id %>
+                <%= link_to profile_path(player2_id: opponent.id) do %>
+                  <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+                <% end %>
+              <% else %>
+                <%= link_to profile_path(player1_id: opponent.id) do %>
+                  <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+                <% end %>
+              <% end %>
+              <div class="notification-content d-flex flex-column">
+                <strong><%= link_to "#{opponent.name}", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
+                <% if game.winner_id == nil %>
+                  <% if game.player2_id == current_user.id %>
+                    <p style="color: #5A81E3; font-size: 15px;">It is your turn</p>
+                  <% else %>
+                    <p style="font-size: 15px;">It is <%= User.find(game.player2_id).name %>'s turn</p>
                   <% end %>
                 <% else %>
-                  <div class="d-flex flex-column">
-                    <p style="font-size: 15px; color: white;">Waiting</p>
-                    <p style="font-size: 15px; color: white;">Opponent</p>
-                  </div>
-                  <%# Show Juego %>
-                  <%# II. Si vos lo iniciaste --> te lleva al show %>
-                  <%#= link_to game_path(game) do  %>
-                    <%# <p class="white-round-filled-btn" style="color: white; width: 70px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Moves</p> %>
-                  <%# end %>
+                  <% if game.draw == nil %>
+                    <% if User.find(game.winner_id) == current_user %>
+                      <p style="font-size: 15px; color: green;">You won!</p>
+                    <% else %>
+                      <p style="font-size: 15px; color: red;">You lost</p>
+                    <% end %>
+                  <% else %>
+                    <p style="font-size: 15px; color: red;">It is a draw</p>
+                  <% end %>
                 <% end %>
-              <%# end %>
-            <% end %>
-          </div>
+              </div>
 
-        </div>
-      <%# end %>
-    <% end %>
+            <% end %>
+
+            <div class="notification-actions">
+
+              <%# IF THE GAME IS FINISHED %>
+              <% if game.winner_id != nil %>
+                <div class="d-flex flex-column">
+                  <%= link_to new_game_path(player1_id: current_user.id, player2_id: opponent.id) do  %>
+                    <p style="font-size: 15px; color: white; text-align: center;">Play again</p>
+                  <% end %>
+                  <% if game.draw == nil %>
+                    <% if User.find(game.winner_id) == current_user %>
+                      <p style="font-size: 15px; color: white;">1/0</p>
+                    <% else %>
+                      <p style="font-size: 15px; color: white;">0/1</p>
+                    <% end %>
+                  <% else %>
+                    <p style="font-size: 15px; color: white;">0/0</p>
+                  <% end %>
+                </div>
+
+
+              <%# IF THE GAME IS NOT FINISHED %>
+              <% else %>
+                <%# if game.hand2 == nil %>
+                  <% if game.player2_id == current_user.id %>
+                    <%# II. Si vos no lo iniciaste --> te lleva al edit %>
+                    <%= link_to edit_game_path(game) do  %>
+                      <p class="white-round-filled-btn" style="color: white; width: 70px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Play!</p>
+                    <% end %>
+                  <% else %>
+                    <div class="d-flex flex-column">
+                      <p style="font-size: 15px; color: white;">Waiting</p>
+                      <p style="font-size: 15px; color: white;">Opponent</p>
+                    </div>
+                    <%# Show Juego %>
+                    <%# II. Si vos lo iniciaste --> te lleva al show %>
+                    <%#= link_to game_path(game) do  %>
+                      <%# <p class="white-round-filled-btn" style="color: white; width: 70px; height: 30px;background: #5A81E3; font-weight: 600; font-size: 14px; text-align: center;">Moves</p> %>
+                    <%# end %>
+                  <% end %>
+                <%# end %>
+              <% end %>
+            </div>
+
+          </div>
+        <%# end %>
+      <% end %>
+    </div>
   </div>
-</div>
+<% else %>
+  <div class="container mt-3">
+    <p style="color: white; text-align:center; margin-bottom: 0;">No games played yet</p>
+    <p style="color: white; text-align:center;">Interact with people around you</p>
+  </div>
+<% end %>
 
 <%# ------------------------RELOAD-------------------- %>
 
