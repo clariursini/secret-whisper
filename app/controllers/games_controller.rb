@@ -21,7 +21,8 @@ class GamesController < ApplicationController
     @game.player2_id = @player2
 
     if @game.save!
-      redirect_to bar_path(current_user.bar_code)
+      redirect_to game_path(@game)
+      # redirect_to bar_path(current_user.bar_code)
     else
       render :new, status: :unprocessable_entity
     end
