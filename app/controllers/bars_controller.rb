@@ -30,6 +30,19 @@ class BarsController < ApplicationController
     @beer = Beer.new
     @beers = Beer.all
     @game = Game.new
+
+    # ------BEERS NOTIFICATIONS------#
+    @beersita = Beer.where(recipient_id: current_user)
+    @beer_read = []
+    @beersita.each do |beer|
+      if beer.read == false
+        @beer_read << beer
+      end
+    end
+
+    # ------CONVERSATIONS NOTIFICATIONS------#
+    @conversationsita = Conversation.where(recipient_id: current_user) || Conversation.where(sender_id: current_user)
+
   end
 
   def barcode

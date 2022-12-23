@@ -352,11 +352,11 @@
   <% end %>
 </div>
 
+<% console %>
 
-<script>
-  // window.onpopstate = function () {
-  //   location.reload()
-  // };
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
+
+    // ------------- RELOAD WHEN COMING BACK---------------- //
 
     if( window.localStorage )
     {
@@ -368,4 +368,27 @@
       else
         localStorage.removeItem('firstLoad');
     }
+
+    // ------------- RELOAD NOTIFICATIONS ---------------- //
+
+    $(document).ready(function () {
+        refresh_Div();
+    });
+
+    function refresh_Div() {
+      $( "#beer-notice" ).load(window.location.href + " #beer-notice" );
+    }
+
+    // var reloadXML = setInterval(refresh_Div(), 5000);
+
+    setTimeout(function() {
+      refresh_Div();
+    }, 5000);
+
+    // $(document).ready(function () {
+    //   setTimeout(function() {
+    //     refresh_Div();
+    //   }, 5000);
+    // })
+
 </script>
