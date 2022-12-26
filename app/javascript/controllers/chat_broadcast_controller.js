@@ -24,6 +24,9 @@ export default class extends Controller {
      // Inserting the `message` in the DOM
      this.messagesTarget.insertAdjacentHTML("beforeend", messageElement)
      this.messagesTarget.scrollTo(0, this.messagesTarget.scrollHeight)
+     items = document.querySelectorAll(".message-new");
+     last = items[items.length-1];
+     last.scrollIntoView();
    }
 
    #buildMessageElement(currentUserIsSender, message) {
