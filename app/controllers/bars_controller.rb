@@ -41,7 +41,32 @@ class BarsController < ApplicationController
     end
 
     # ------CONVERSATIONS NOTIFICATIONS------#
-    @conversationsita = Conversation.where(recipient_id: current_user) || Conversation.where(sender_id: current_user)
+    @conv = Conversation.where(recipient_id: current_user) + Conversation.where(sender_id: current_user)
+    @conv_read = []
+    @conv.each do |conversation|
+      @messages = conversation.messages
+      @messages.each do |message|
+        if message.read == false && message.user_id != current_user.id
+          @conv_read << message
+        end
+      end
+    end
+
+    # ------GAMES NOTIFICATIONS------#
+    @games = Game.where(player2_id: current_user)
+    @games_read = []
+    @games.each do |game|
+      if game.read == false && game.winner_id.nil?
+        @games_read << game
+      end
+    end
+
+    @games2 = Game.where(player1_id: current_user)
+    @games2.each do |game|
+      if !game.winner_id.nil? && game.read == false
+        @games_read << game
+      end
+    end
 
   end
 

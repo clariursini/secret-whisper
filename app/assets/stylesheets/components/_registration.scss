@@ -154,4 +154,9 @@ input[type="text" i] {
   position: absolute;
   top: 212px;
   right: 3px;
+  // z-index: 1;
+}
+
+.dropdown-menu a {
+  // z-index: 4;
 }

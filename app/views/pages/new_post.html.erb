@@ -15,57 +15,58 @@
 </div>
 
 <div class="hiddden" id="hidden-div"></div>
+<div>
+  <% if @user.photo.key != nil %>
 
-<% if @user.photo.key != nil %>
+    <%= cl_image_tag current_user.photo.key, id:"first-photo" %>
+    <img class= "user-photo d-none" id="user-photo">
 
-  <%= cl_image_tag current_user.photo.key, id:"first-photo" %>
-  <img class= "user-photo d-none" id="user-photo">
+    <div>
+      <%= simple_form_for(@user, url: update_post_path(@user),html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :photo, input_html: { class: 'd-none'}, label: false %>
+        <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: image_tag('upload-photo.png')  %>
+    </div>
 
-  <div>
-    <%= simple_form_for(@user, url: update_post_path(@user),html: { method: :put }) do |f| %>
-      <%= f.error_notification %>
-      <%= f.input :photo, input_html: { class: 'd-none'}, label: false %>
-      <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: image_tag('upload-photo.png')  %>
-  </div>
+        <%= f.input :description,
+            required: false,
+            label: "Post a comment",
+            input_html: { autocomplete: "about-me" },
+            placeholder: "Add a post" %>
 
-      <%= f.input :description,
-      required: false,
-      label: "Post a comment",
-      input_html: { autocomplete: "about-me" },
-      placeholder: "Add a post" %>
-
-        <div class="d-flex justify-content-center">
-        <div class="form-actions">
-          <%= f.button :submit, "Post", class: "white-round-filled-btn", style: "padding-right: 10px; padding-left: 10px; width: 103px; height: 41px; margin-top: 20px;" %>
+          <div class="d-flex justify-content-center">
+          <div class="form-actions">
+            <%= f.button :submit, "Post", class: "white-round-filled-btn", style: "padding-right: 10px; padding-left: 10px; width: 103px; height: 41px; margin-top: 20px;" %>
+          </div>
         </div>
-      </div>
-    <% end %>
+      <% end %>
 
-<% else %>
+  <% else %>
 
-  <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", id:"first-photo" %>
-  <img class= "user-photo d-none" id="user-photo">
+    <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", id:"first-photo" %>
+    <img class= "user-photo d-none" id="user-photo">
 
-  <div>
-    <%= simple_form_for(@user, url: update_post_path(@user),html: { method: :put }) do |f| %>
-      <%= f.error_notification %>
-      <%= f.input :photo, input_html: { class: 'd-none'}, label: false %>
-      <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: image_tag('upload-photo.png')  %>
-  </div>
+    <div>
+      <%= simple_form_for(@user, url: update_post_path(@user),html: { method: :put }) do |f| %>
+        <%= f.error_notification %>
+        <%= f.input :photo, input_html: { class: 'd-none'}, label: false %>
+        <%= f.input :photo, input_html: { class: 'd-none', id: 'photo-input'}, label_html: { class: 'upload-photo'}, label: image_tag('upload-photo.png')  %>
+    </div>
 
-      <%= f.input :description,
-      required: false,
-      label: "Post a comment",
-      input_html: { autocomplete: "about-me" },
-      placeholder: "Add a post" %>
+        <%= f.input :description,
+        required: false,
+        label: "Post a comment",
+        input_html: { autocomplete: "about-me" },
+        placeholder: "Add a post" %>
 
-        <div class="d-flex justify-content-center">
-        <div class="form-actions">
-          <%= f.button :submit, "Post", class: "white-round-filled-btn", style: "padding-right: 10px; padding-left: 10px; width: 103px; height: 41px; margin-top: 20px;" %>
+          <div class="d-flex justify-content-center">
+          <div class="form-actions">
+            <%= f.button :submit, "Post", class: "white-round-filled-btn", style: "padding-right: 10px; padding-left: 10px; width: 103px; height: 41px; margin-top: 20px;" %>
+          </div>
         </div>
-      </div>
-    <% end %>
-<% end %>
+      <% end %>
+  <% end %>
+</div>
 
 
 <script>

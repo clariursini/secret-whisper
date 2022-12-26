@@ -25,7 +25,11 @@
 
   <div class="d-flex container">
     <div class="container d-flex flex-column justify-content-start">
-      <h1 style="margin-top: 10px;"><%= @user.name %>, <%= @user.age %></h1>
+      <% if @user.age != nil %>
+        <h1 style="margin-top: 10px;"><%= @user.name %>, <%= @user.age %></h1>
+      <% else %>
+        <h1 style="margin-top: 10px;"><%= @user.name %></h1>
+      <% end %>
     </div>
 
     <div class="notification-actions d-flex">
@@ -146,7 +150,11 @@
   <div class="container">
     <div class="container">
       <p class="mb-4"><%= @user.description %></p>
-      <p class="gender-btn white-outlined-btn" style="width: 72px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px;"><small><%= @user.gender %></small></p>
+      <% if @user.gender != "I'd rather not say" %>
+        <p class="gender-btn white-outlined-btn" style="width: 72px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px;"><small><%= @user.gender %></small></p>
+      <% else %>
+        <p class="gender-btn white-outlined-btn" style="width: 112px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px;"><small><%= @user.gender %></small></p>
+      <% end %>
     </div>
   </div>
 

@@ -15,8 +15,8 @@
 <%# ------------------------MAIN-------------------- %>
 <% @game_check = @games.where(player1_id: current_user.id).first || @games.where(player2_id: current_user.id).first %>
 <% if @game_check != nil %>
-  <div class="container mt-3">
-    <div class="list">
+  <div class="container">
+    <div class="list" style="overflow: scroll; height: 92vh;">
 
       <% @games.each do |game| %>
         <%# if game.player1_id == current_user.id || game.player2_id == current_user.id %>
@@ -29,17 +29,19 @@
           <div class="notification">
             <% if opponent.photo.key != nil %>
 
-              <% if game.player1_id == current_user.id %>
-                <%= link_to profile_path(player2_id: opponent.id) do %>
-                  <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
+              <div class="col-2">
+                <% if game.player1_id == current_user.id %>
+                  <%= link_to profile_path(player2_id: opponent.id) do %>
+                    <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
+                  <% end %>
+                <% else %>
+                  <%= link_to profile_path(player1_id: opponent.id) do %>
+                    <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
+                  <% end %>
                 <% end %>
-              <% else %>
-                <%= link_to profile_path(player1_id: opponent.id) do %>
-                  <%= cl_image_tag opponent.photo.key, class: "avatar-large" %>
-                <% end %>
-              <% end %>
+              </div>
 
-              <div class="notification-content d-flex flex-column">
+              <div class="notification-content d-flex flex-column col-7">
                 <strong><%= link_to "#{opponent.name}", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
                 <% if game.winner_id == nil %>
                   <% if game.player2_id == current_user.id %>
@@ -61,17 +63,19 @@
               </div>
 
             <% else %>
+              <div class="col-2">
+                <% if game.player1_id == current_user.id %>
+                  <%= link_to profile_path(player2_id: opponent.id) do %>
+                    <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+                  <% end %>
+                <% else %>
+                  <%= link_to profile_path(player1_id: opponent.id) do %>
+                    <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+                  <% end %>
+                <% end %>
+              </div>
 
-              <% if game.player1_id == current_user.id %>
-                <%= link_to profile_path(player2_id: opponent.id) do %>
-                  <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
-                <% end %>
-              <% else %>
-                <%= link_to profile_path(player1_id: opponent.id) do %>
-                  <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
-                <% end %>
-              <% end %>
-              <div class="notification-content d-flex flex-column">
+              <div class="notification-content d-flex flex-column col-7">
                 <strong><%= link_to "#{opponent.name}", profile_path(sender_id: opponent.id), style:"margin-right: 15px;" %></strong>
                 <% if game.winner_id == nil %>
                   <% if game.player2_id == current_user.id %>
@@ -94,7 +98,7 @@
 
             <% end %>
 
-            <div class="notification-actions">
+            <div class="notification-actions col-3">
 
               <%# IF THE GAME IS FINISHED %>
               <% if game.winner_id != nil %>
@@ -143,7 +147,7 @@
     </div>
   </div>
 <% else %>
-  <div class="container mt-3">
+  <div class="container" style="padding-top: 70px;">
     <p style="color: white; text-align:center; margin-bottom: 0;">No games played yet</p>
     <p style="color: white; text-align:center;">Interact with people around you</p>
   </div>

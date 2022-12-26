@@ -97,6 +97,7 @@
   position: fixed;
   bottom: 10px;
   left: 0px;
+  background: black;
 }
 
 .send{
@@ -109,7 +110,7 @@
 }
 
 .messages-box{
-  height: 490px !important;
+  height: 480px !important;
   overflow:scroll;
   overflow-x:hidden;
 }

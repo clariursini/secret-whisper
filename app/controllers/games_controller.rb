@@ -2,6 +2,11 @@ class GamesController < ApplicationController
   def index
     @games = Game.where("player1_id = ? OR player2_id = ?", current_user, current_user).order(created_at: :desc)
     @game = Game.new
+
+    @games.each do |game|
+      game.read = true
+      game.save!
+    end
   end
 
   def show
@@ -35,6 +40,8 @@ class GamesController < ApplicationController
   def update
     @game = Game.find(params[:id])
     @game.update(game_params)
+
+    @game.read = false
 
     winner
     @game.save!
