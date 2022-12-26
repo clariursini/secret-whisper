@@ -1,5 +1,5 @@
 <%= render "shared/navbar-main" %>
-<div class="">
+<div class="" style="height: 91vh; overflow: scroll;">
   <h1 id="bar-name" onpageshow="reloadFunction()" style="display: none;"><%= @bar.name %></h1>
 
   <%# <div class="notification user-card"> %>
@@ -40,8 +40,12 @@
 
     <%# </div> %>
   <%# </div> %>
+
   <% if current_user.bar_code != 1 %>
-    <div class="list">
+    <div class="list" id="friend">
+      <%# <div> %>
+        <%# <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item", style: "color: white; position: fixed; top: 100px; display: none;", id: "log-out"%>
+      <%# </div> %>
       <% @users.each do |user| %>
         <% if user.id != current_user.id %>
             <div class="friend">
@@ -352,43 +356,37 @@
   <% end %>
 </div>
 
-<% console %>
+<script>
+  // ------------- RELOAD WHEN COMING BACK---------------- //
 
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.1/jquery.min.js">
-
-    // ------------- RELOAD WHEN COMING BACK---------------- //
-
-    if( window.localStorage )
+  if( window.localStorage )
+  {
+    if( !localStorage.getItem('firstLoad') )
     {
-      if( !localStorage.getItem('firstLoad') )
-      {
-        localStorage['firstLoad'] = true;
-        window.location.reload();
-      }
-      else
-        localStorage.removeItem('firstLoad');
+      localStorage['firstLoad'] = true;
+      window.location.reload();
     }
+    else
+      localStorage.removeItem('firstLoad');
+  }
 
-    // ------------- RELOAD NOTIFICATIONS ---------------- //
+  // ------------- RELOAD AFTER 1 SECONDS---------------- //
 
-    $(document).ready(function () {
-        refresh_Div();
-    });
+  function refresh_Div() {
+    $( "#beer-notice" ).load(window.location.href + " #beer-notice" );
+    $( "#conversation-notice" ).load(window.location.href + " #conversation-notice" );
+    $( "#game-notice" ).load(window.location.href + " #game-notice" );
+    $( "#friend" ).load(window.location.href + " #friend" );
+  }
 
-    function refresh_Div() {
-      $( "#beer-notice" ).load(window.location.href + " #beer-notice" );
-    }
-
-    // var reloadXML = setInterval(refresh_Div(), 5000);
-
+  const refreshNotification = () => {
     setTimeout(function() {
-      refresh_Div();
-    }, 5000);
+    refresh_Div();
+    console.log("estoy volviendo")
+    refreshNotification();
+    }, 1000);
+  }
 
-    // $(document).ready(function () {
-    //   setTimeout(function() {
-    //     refresh_Div();
-    //   }, 5000);
-    // })
+  refreshNotification();
 
 </script>
