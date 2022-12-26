@@ -1,0 +1,32 @@
+#filter{
+  text-align: center;
+  font-size: 14px;
+  border-radius: 50px;
+  background-color: black;
+  color: white;
+  border: 3px solid white;
+  text-decoration: none;
+  padding: 3px;
+  font-weight: bold;
+  width: 94px !important;
+  height: 31px;
+}
+
+#filter option{
+  color: white;
+  background: black;
+  border-radius: 15px;
+}
+
+#filter:focus{
+  color: white !important;
+  background: black;
+  border-radius: 15px;
+  border: 2px, solid, white;
+}
+
+#filter-form{
+  position: fixed;
+  right: 5px;
+  top: 65px;
+}

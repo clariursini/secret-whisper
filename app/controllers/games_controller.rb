@@ -1,6 +1,6 @@
 class GamesController < ApplicationController
   def index
-    @games = Game.where("player1_id = ? OR player2_id = ?", current_user, current_user).order(created_at: :desc)
+    @games = Game.where("player1_id = ? OR player2_id = ?", current_user, current_user).order(updated_at: :desc)
     @game = Game.new
 
     @games.each do |game|
