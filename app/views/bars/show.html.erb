@@ -41,11 +41,19 @@
     <%# </div> %>
   <%# </div> %>
 
+  <%= form_with url: bar_path(current_user.bar_code), method: :get, class: "d-flex", id: "filter-form" do %>
+    <%= select_tag(:query, options_for_select(['All', 'Female', 'Male', 'Other' ]), class: "form-control white-outlined-big-btn filter-option", id: "filter", placeholder: params[:query])%>
+    <%= button_tag :submit, style:"background: none; border: none;" do %>
+      <i class="fa-regular fa-circle-check" style="color: white; background: black; border-radius: 50px;" id="filter-submit"></i>
+    <% end %>
+  <% end %>
+
   <% if current_user.bar_code != 1 %>
     <div class="list" id="friend">
       <%# <div> %>
         <%# <%= link_to "Log out", destroy_user_session_path, data: {turbo_method: :delete}, class: "dropdown-item", style: "color: white; position: fixed; top: 100px; display: none;", id: "log-out"%>
       <%# </div> %>
+
       <% @users.each do |user| %>
         <% if user.id != current_user.id %>
             <div class="friend">
@@ -384,9 +392,40 @@
     refresh_Div();
     console.log("estoy volviendo")
     refreshNotification();
-    }, 1000);
+    }, 5000);
   }
 
   refreshNotification();
+
+  // ------------- FILTER BUTTON ---------------- //
+
+  // const filter = () => {
+  //   const filterText = document.getElementById('filter')
+  //   filterText.value = "Filter"
+  //   // filterText.style = "color: white";
+  // }
+
+  // filter();
+
+  const filterSubmit = document.getElementById("filter-submit")
+  const placeholder = document.getElementById("filter").getAttribute('placeholder')
+
+  filterSubmit.addEventListener('click', e => {
+    setTimeout(() => {
+      location.reload();
+    }, 500);
+  })
+
+  if (placeholder === "Female") {
+      document.getElementById("filter").value = "Female"
+    }
+
+    if (placeholder === "Male") {
+      document.getElementById("filter").value = "Male"
+    }
+
+    if (placeholder === "Other") {
+      document.getElementById("filter").value = "Other"
+    }
 
 </script>
