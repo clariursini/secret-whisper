@@ -14,7 +14,7 @@
 
 <%# ------------------------MAIN-------------------- %>
 
-<div class="container mt-4">
+<div class="container mt-3">
 
   <%# IF THE GAME IS FINISHED %>
   <% if @game.winner_id != nil  %>
@@ -28,7 +28,7 @@
             <% if @player1.photo.key != nil %>
               <%= cl_image_tag @player1.photo.key, class: "avatar" %>
             <% else %>
-              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar" %>
             <% end %>
           <% end %>
 
@@ -90,7 +90,7 @@
             <% if @player2.photo.key != nil %>
               <%= cl_image_tag @player2.photo.key, class: "avatar" %>
             <% else %>
-              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar" %>
             <% end %>
           <% end %>
 
@@ -157,7 +157,7 @@
             <% if @winner.photo.key != nil %>
               <%= cl_image_tag @winner.photo.key, class: "avatar" %>
             <% else %>
-              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar" %>
             <% end %>
           <% end %>
 
@@ -191,7 +191,7 @@
             <% if @player1.photo.key != nil %>
               <%= cl_image_tag @player1.photo.key, class: "avatar" %>
             <% else %>
-              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar" %>
             <% end %>
           <% end %>
 
@@ -253,7 +253,7 @@
             <% if @player2.photo.key != nil %>
               <%= cl_image_tag @player2.photo.key, class: "avatar" %>
             <% else %>
-              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-xl" %>
+              <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar" %>
             <% end %>
           <% end %>
 
