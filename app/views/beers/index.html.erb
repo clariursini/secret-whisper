@@ -15,27 +15,31 @@
 <%# ------------------------MAIN-------------------- %>
 <% @beer_check = @beers.where(sender_id: current_user.id).first || @beers.where(recipient_id: current_user.id).first %>
 <% if @beer_check != nil %>
-  <div class="container mt-3">
-    <div class="list">
+  <div class="container">
+    <div class="list" style="overflow: scroll; height: 88vh;">
       <% @beers.each do |beer| %>
         <div class="notification">
           <% if beer.sender.photo.key != nil %>
-              <%= link_to profile_path(sender_id: beer.sender.id) do %>
-                <%= cl_image_tag beer.sender.photo.key, class: "avatar-large" %>
-              <% end %>
-              <div class="notification-content">
+              <div class="col-2">
+                <%= link_to profile_path(sender_id: beer.sender.id) do %>
+                  <%= cl_image_tag beer.sender.photo.key, class: "avatar-large" %>
+                <% end %>
+              </div>
+              <div class="notification-content col-7">
                 <strong><%= link_to "#{beer.sender.name}", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
               </div>
           <% else %>
-              <%= link_to profile_path(sender_id: beer.sender.id) do %>
-                <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
-              <% end %>
-              <div class="notification-content">
+              <div class="col-2">
+                <%= link_to profile_path(sender_id: beer.sender.id) do %>
+                  <%= image_tag "https://cdn-icons-png.flaticon.com/512/149/149071.png", class: "avatar-large" %>
+                <% end %>
+              </div>
+              <div class="notification-content col-7">
                 <strong><%= link_to "#{beer.sender.name}", profile_path(sender_id: beer.sender.id), style:"margin-right: 15px;" %></strong>
               </div>
           <% end %>
 
-          <div class="notification-actions">
+          <div class="notification-actions col-3">
 
               <% @target = Beer.where(sender_id: beer.recipient, recipient_id: beer.sender).first %>
               <% if @target.present? %>
@@ -67,7 +71,7 @@
     </div>
   </div>
 <% else %>
-  <div class="container mt-3">
+  <div class="container" style="padding-top: 70px;">
     <p style="color: white; text-align:center; margin-bottom: 0;">No beers received yet</p>
     <p style="color: white; text-align:center;">Interact with people around you</p>
   </div>
