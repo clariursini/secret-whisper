@@ -25,11 +25,23 @@ class BarsController < ApplicationController
 
   def show
     @bar = Bar.find(current_user.bar_code)
-    @users = User.where(bar_code: current_user.bar_code)
     @conversation = Conversation.new
     @beer = Beer.new
     @beers = Beer.all
     @game = Game.new
+
+    if params[:query].present?
+      if params[:query] == "All"
+        @users = User.where(bar_code: current_user.bar_code)
+      elsif params[:query] == "Other"
+        @users = User.where(bar_code: current_user.bar_code, gender: "I'd rather not say")
+      else
+        @users = User.where(bar_code: current_user.bar_code, gender: params[:query])
+      end
+    else
+      @users = User.where(bar_code: current_user.bar_code)
+    end
+
 
     # ------BEERS NOTIFICATIONS------#
     @beersita = Beer.where(recipient_id: current_user)
