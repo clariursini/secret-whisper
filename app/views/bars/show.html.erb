@@ -1,5 +1,7 @@
 <%= render "shared/navbar-main" %>
+
 <div class="" style="height: 91vh; overflow: scroll;">
+<div class="d-none" id="current-bar" value=<%= current_user.bar_code %>></div>
   <h1 id="bar-name" onpageshow="reloadFunction()" style="display: none;"><%= @bar.name %></h1>
 
   <%# <div class="notification user-card"> %>
@@ -43,7 +45,7 @@
 
   <%= form_with url: bar_path(current_user.bar_code), method: :get, class: "d-flex", id: "filter-form" do %>
     <%= select_tag(:query, options_for_select(['All', 'Female', 'Male', 'Other' ]), class: "form-control white-outlined-big-btn filter-option", id: "filter", placeholder: params[:query])%>
-    <%= button_tag :submit, style:"background: none; border: none;" do %>
+    <%= button_tag :submit, style:"background: none; border: none;", class:"d-none" do %>
       <i class="fa-regular fa-circle-check" style="color: white; background: black; border-radius: 50px;" id="filter-submit"></i>
     <% end %>
   <% end %>
@@ -367,7 +369,7 @@
 <script>
   // ------------- RELOAD WHEN COMING BACK---------------- //
 
-  if( window.localStorage )
+  if(window.localStorage)
   {
     if( !localStorage.getItem('firstLoad') )
     {
@@ -406,26 +408,57 @@
   // }
 
   // filter();
-
+  const filterForm = document.getElementById("filter-form")
   const filterSubmit = document.getElementById("filter-submit")
   const placeholder = document.getElementById("filter").getAttribute('placeholder')
 
-  filterSubmit.addEventListener('click', e => {
-    setTimeout(() => {
-      location.reload();
-    }, 500);
+  // filterSubmit.addEventListener('click', e => {
+  //   setTimeout(() => {
+  //     location.reload();
+  //   }, 500);
+  // })
+
+  switch (placeholder){
+    case "Female":
+      document.getElementById("filter").value = "Female"
+      break
+    case "Male":
+      document.getElementById("filter").value = "Male"
+      break
+    case "Other":
+      document.getElementById("filter").value = "Other"
+      break
+  }
+
+  filterForm.addEventListener('change', e => {
+      e.preventDefault();
+      const filterValue = document.getElementById("filter").value
+      localStorage.setItem('filter', filterValue);
+      filterForm.submit();
   })
 
-  if (placeholder === "Female") {
-      document.getElementById("filter").value = "Female"
-    }
+  const currentBar = document.getElementById("current-bar").value
 
-    if (placeholder === "Male") {
-      document.getElementById("filter").value = "Male"
-    }
+  const filterCheck = () => {
+    const localFilterValue = localStorage.getItem('filter');
 
-    if (placeholder === "Other") {
-      document.getElementById("filter").value = "Other"
+    if (window.location.href.includes(`/bars/${currentBar}`)) {
+      console.log("entro a filtercheck")
+      window.location.href = `${window.location.href}/?query=${localFilterValue}`
     }
+  }
+  filterCheck()
+
+
+  // if (placeholder === "Female") {
+  //     document.getElementById("filter").value = "Female"
+  //   }
+
+  // if (placeholder === "Male") {
+  // }
+
+  // if (placeholder === "Other") {
+  //   document.getElementById("filter").value = "Other"
+  // }
 
 </script>
