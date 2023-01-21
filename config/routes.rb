@@ -22,4 +22,5 @@ Rails.application.routes.draw do
   post "create_beer/:id", to: 'beers#create_beer', as: 'create_beer'
   delete "delete_beer/:id", to: 'beers#delete_beer', as: 'delete_beer'
   get 'video', to: 'pages#video', as: 'video'
+  get 'reset_barcodes', to: 'bars#reset_barcodes', as: 'reset_barcodes'
 end
