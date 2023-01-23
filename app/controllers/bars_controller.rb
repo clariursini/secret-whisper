@@ -94,6 +94,15 @@ class BarsController < ApplicationController
     end
   end
 
+  def reset_barcodes
+    users = User.all
+    users.each do |user|
+      user.bar_code = 1
+      user.save
+    end
+    puts "Barcodes reseted asdasdasdasd"
+  end
+
   private
 
   def bar_params
