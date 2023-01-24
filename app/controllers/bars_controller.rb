@@ -42,7 +42,6 @@ class BarsController < ApplicationController
       @users = User.where(bar_code: current_user.bar_code)
     end
 
-
     # ------BEERS NOTIFICATIONS------#
     @beersita = Beer.where(recipient_id: current_user)
     @beer_read = []
@@ -100,7 +99,7 @@ class BarsController < ApplicationController
       user.bar_code = 1
       user.save
     end
-    puts "Barcodes reseted asdasdasdasd"
+    redirect_to root_path(:barcode => barcode)
   end
 
   private
