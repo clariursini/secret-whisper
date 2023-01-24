@@ -34,8 +34,30 @@ const toggleCreateDivs = (index) => {
   setTimeout(() => {
     location.reload()
   }, 1000);
+  // window.addEventListener("unload", e => {
+  //   var scrollPosition = document.getElementById(`${index}`).scrollTop();
+  //   localStorage.setItem("scrollPosition", scrollPosition);
 
+  //   if(localStorage.scrollPosition) {
+  //     document.getElementById(`${index}`).scrollTop(localStorage.getItem("scrollPosition"));
+  //   }
+  // })
 }
+
+// document.getElementById("scroll-element").addEventListener("scroll", function() {
+//   console.log(document.getElementById("scroll-element").scrollY)
+//   localStorage.setItem("scroll", document.getElementById("scroll-element").scrollY);
+// });
+
+// document.getElementById("scroll-element").addEventListener("scroll", (event) => {
+//   let scroll = document.getElementById("scroll-element").scrollY;
+//   console.log(scroll)
+// });
+
+// let top = localStorage.getItem("scroll");
+// document.scrollTop = top;
+
+window.addEventListener('scroll', function(){console.log(this.scrollY)})
 
 const toggleDeleteDivs = (index) => {
   deleteDivs[index].classList.add("d-none")
@@ -43,6 +65,14 @@ const toggleDeleteDivs = (index) => {
   setTimeout(() => {
     location.reload()
   }, 1000);
+  // window.addEventListener("unload", e => {
+  //   var scrollPosition = document.getElementById(`${index}`).scrollTop();
+  //   localStorage.setItem("scrollPosition", scrollPosition);
+
+  //   if(localStorage.scrollPosition) {
+  //     document.getElementById(`${index}`).scrollTop(localStorage.getItem("scrollPosition"));
+  //   }
+  // })
 }
 
 createBtns.forEach((btn, index) => {
