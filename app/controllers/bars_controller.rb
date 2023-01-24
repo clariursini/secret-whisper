@@ -1,5 +1,5 @@
 class BarsController < ApplicationController
-  skip_before_action :authenticate_user!, only: [ :barcode ]
+  skip_before_action :authenticate_user!, only: [ :barcode, :reset_barcodes ]
   def index
     @bars = Bar.all
     @barsito = Bar.new
@@ -89,7 +89,7 @@ class BarsController < ApplicationController
       redirect_to bar_path(current_user.bar_code)
     else
       barcode = params[:id]
-      redirect_to root_path(:barcode => barcode)
+      redirect_to bar_path(:barcode => barcode)
     end
   end
 
@@ -99,7 +99,7 @@ class BarsController < ApplicationController
       user.bar_code = 1
       user.save
     end
-    redirect_to root_path(:barcode => barcode)
+    redirect_to home_path
   end
 
   private
