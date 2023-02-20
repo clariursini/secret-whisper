@@ -66,6 +66,21 @@
                     <%= link_to profile_path(recipient_id: user.id) do %>
                       <%= user.name %>
                     <% end %>
+                    <% if user.instagram != nil %>
+                      <a href="https://www.instagram.com/<%=user.instagram%>" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <% end %>
+                    <% if user.twitter != nil %>
+                      <a href="https://twitter.com/<%=user.twitter%>" target="_blank"><i class="fa-brands fa-square-twitter"></i></a>
+                    <% end %>
+                    <% if user.tiktok != nil %>
+                      <a href="https://www.tiktok.com/@<%=user.tiktok%>" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                    <% end %>
+                    <% if user.snapchat != nil %>
+                      <a href="https://www.instagram.com/<%=user.snapchat%>" target="_blank"><i class="fa-brands fa-snapchat"></i></a>
+                    <% end %>
+                    <% if user.linkedin != nil %>
+                      <a href="https://www.linkedin.com/in/<%=user.linkedin%>" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <% end %>
                   </div>
 
                   <div class="notification-actions">
@@ -208,6 +223,21 @@
                   <div class="friend-name align-items-bottom">
                     <%= link_to profile_path(recipient_id: user.id) do %>
                       <%= user.name %>
+                    <% end %>
+                    <% if user.instagram != nil %>
+                      <a href="https://www.instagram.com/<%=user.instagram%>" target="_blank"><i class="fa-brands fa-instagram"></i></a>
+                    <% end %>
+                    <% if user.twitter != nil %>
+                      <a href="https://twitter.com/<%=user.twitter%>" target="_blank"><i class="fa-brands fa-square-twitter"></i></a>
+                    <% end %>
+                    <% if user.tiktok != nil %>
+                      <a href="https://www.tiktok.com/@<%=user.tiktok%>" target="_blank"><i class="fa-brands fa-tiktok"></i></a>
+                    <% end %>
+                    <% if user.snapchat != nil %>
+                      <a href="https://www.instagram.com/<%=user.snapchat%>" target="_blank"><i class="fa-brands fa-snapchat"></i></a>
+                    <% end %>
+                    <% if user.linkedin != nil %>
+                      <a href="https://www.linkedin.com/in/<%=user.linkedin%>" target="_blank"><i class="fa-brands fa-linkedin-in"></i></a>
                     <% end %>
                   </div>
 

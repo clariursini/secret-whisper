@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
     devise_parameter_sanitizer.permit(:sign_up, keys: [ :name, :description, :age, :photo, :remember_me, :gender, :interests ])
 
     # For additional in app/views/devise/registrations/edit.html.erb
-    devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :description, :age, :photo, :remember_me, :gender, :interests ])
+    devise_parameter_sanitizer.permit(:account_update, keys: [ :name, :description, :age, :photo, :remember_me, :gender, :interests,:instagram, :twitter, :tiktok, :snapchat, :linkedin, :other_social ])
   end
 
   def after_sign_in_path_for(*)

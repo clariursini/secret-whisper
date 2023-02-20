@@ -78,6 +78,25 @@
             <p class="gender-btn white-outlined-btn" style="width: 120px; padding: 2px; text-align: center; font-weight: 600; font-size: 14px; border: 2px solid; margin-right: 10px; cursor: pointer;">I'd rather not say</p>
           </div>
         </div>
+
+      <%= f.input :instagram,
+                  required: false,
+                  label: "Instagram user"%>
+      <%= f.input :twitter,
+                  required: false,
+                  label: "Twitter user"%>
+      <%= f.input :tiktok,
+                  required: false,
+                  label: "TikTok user"%>
+      <%= f.input :snapchat,
+                  required: false,
+                  label: "Snapchat use r"%>
+      <%= f.input :linkedin,
+                  required: false,
+                  label: "LinkedIn user"%>
+      <%#= f.input :other_social,
+                  required: false,
+                  label: "Instagram user"%>
       <%#= f.input :interests,
                   as: :select, collection: ["Female", "Male", "Other", "Both"],
                   required: false,
