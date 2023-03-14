@@ -46,13 +46,13 @@ user4.photo.attach(io: file, filename: "beni.png", content_type: "image/png")
 user4.save!
 
 user5 = User.new(email: "piova@gmail.com", password: "123456", name: "Piova", age: 25, description: "I love Ford", gender: "Male", interests: "Male",  bar_code: bar3.id)
-file = URI.open("https://pps.whatsapp.net/v/t61.24694-24/165527265_263587749314606_7516529023045156188_n.jpg?ccb=11-4&oh=01_AdT7vxK7Ag14kidisUziZQpi40h6JRxA1K4w38R0rSarcA&oe=63768F94")
+file = URI.open("https://www.google.com/url?sa=i&url=https%3A%2F%2Fmejorconsalud.as.com%2F5-formas-como-actua-un-hombre-al-sentirse-atraido%2F&psig=AOvVaw1ct2TDL9yZR2ICpeYWoeV8&ust=1678844053903000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLCz5syj2v0CFQAAAAAdAAAAABAJ")
 user5.photo.attach(io: file, filename: "piova.png", content_type: "image/png")
 user5.save!
 
 user6 = User.new(email: "man@gmail.com", password: "123456", name: "Man", age: 25, description: "I love Ford", gender: "Male", interests: "Female",  bar_code: 1)
-file = URI.open("https://pps.whatsapp.net/v/t61.24694-24/56153890_2341045275926347_581404302610792448_n.jpg?ccb=11-4&oh=01_AdTaJJMMxO2vnLCae_CX9r4JcgajHEhPMmVi-dQAMswSbw&oe=6376A210")
-user6.photo.attach(io: file, filename: "man.png", content_type: "image/png")
+file = URI.open("https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.freepik.es%2Ffotos-vectores-gratis%2Fhombre&psig=AOvVaw1ct2TDL9yZR2ICpeYWoeV8&ust=1678844053903000&source=images&cd=vfe&ved=0CBAQjRxqFwoTCLCz5syj2v0CFQAAAAAdAAAAABAQ")
+user6.photo.attach(io: file, filename: "man.jpg", content_type: "image/jpg")
 user6.save!
 
 puts "Created users"
