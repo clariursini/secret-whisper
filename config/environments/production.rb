@@ -93,4 +93,8 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
   # Workaround para Railway https://stackoverflow.com/questions/23180650/how-to-solve-error-missing-secret-key-base-for-production-environment-rai
   config.secret_key_base = ENV["RAILS_MASTER_KEY"]
+
+  # Para no bloquear el host al que se sube
+  config.hosts.clear
+
 end
