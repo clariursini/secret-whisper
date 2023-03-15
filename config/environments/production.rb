@@ -40,6 +40,7 @@ Rails.application.configure do
 
   # Store uploaded files on the local file system (see config/storage.yml for options).
   config.active_storage.service = :cloudinary
+  config.assets.debug = true
 
   # Mount Action Cable outside main process or domain.
   # config.action_cable.mount_path = nil
@@ -92,5 +93,4 @@ Rails.application.configure do
   # Do not dump schema after migrations.
   config.active_record.dump_schema_after_migration = false
   # Workaround para Railway https://stackoverflow.com/questions/23180650/how-to-solve-error-missing-secret-key-base-for-production-environment-rai
-  config.secret_key_base = ENV["RAILS_MASTER_KEY"]
 end
