@@ -68,4 +68,7 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # Habilitar el host de Railway https://stackoverflow.com/questions/53878453/upgraded-rails-to-6-getting-blocked-host-error
+  config.hosts << '.up.railway.app'
 end
